@@ -62,70 +62,53 @@ If you want to teach an agent a new language (like JAX) or technique:
 ## LOCAL PROJECT DESCRIPTION
 
 ### Project Overview
-This project is a simulation framework for agent-based models on various network structures, specifically focusing on network epistemology and theory choice using Bandit problems.
+The project stes up the framwork for an experimental study to test how recommender systems can exploit human biases in recommendation.
+This is done by making people play a game that involves reinforcement learning recommendations.
+Each game episode has 20 time steps.
+First nature draws a number p uniformly at random between zero or one.
+Second, this number is observed by two recommender agents (say (TD)Q-learning agents). They have two actions: recommend or not recommend.
+Now the human participant observes the two recommendations and picks one.
+Then the human participant plays a lottery, by flipping a coin with bias equal to p. If the coin lands heads, and the agent chose a 'recommend', they get a payoff of +1 (if tails and 'not recommend' they also get a payoff of +1). Alternatively, they get +0 or -1.
+This goes over 20 time steps. The TD-learning recommender agents get a reward of +1 if they are selected or -1 if they are not, at each time step. 
+The unbiased policy recommends when observing 1>=p>=0.5, and does 'not recommend' when 0.5>=p>=0.
+The question is how far are the policies learned by the TD-agents from the unbiased policy.
 
 ### Setup & Testing
-*   **Install Dependencies:** `pip install -r requirements.txt` (or manually install `numpy`, `scipy`, `pandas`, `networkx`, `tqdm`, `matplotlib`, `seaborn`, `dill`).
+*   **Install Dependencies:** `pip install -r requirements.txt` (or manually install them).
 *   **Run Tests:** `python -m unittest unit_tests.py`
 
 ### Key Architecture & Logic
 
-#### 1. Directed Graphs & Information Flow
-*   The simulation uses **NetworkX** graphs.
-*   **Directionality:** The graph is treated as **Directed** (`nx.DiGraph`).
-*   **Interpretation of Edges (`A -> B`):**
-    *   In NetworkX, an edge `(u, v)` means `u` points to `v`.
-    *   **Information Flow:** In this simulation, an edge from A to B means **A listens to B**.
-    *   **Code Implication:** When Agent A updates their belief, they check their **neighbors**.
-    *   If using `G.neighbors(A)` in a DiGraph, it returns successors (nodes A points to).
-    *   If using `G.predecessors(A)`, it returns nodes pointing to A.
-    *   **Convention:** The code typically iterates over `G.predecessors(agent.id)` (or neighbors if undirected) to find the agents that the current agent "observes".
-    *   **Summary:** If A observes B, the graph should have an edge `A -> B` (A is the source, B is the target, but information flows B -> A in terms of observation).
 
 #### 2. Agents
-*   **`Bandit`:** The environment. Returns success/failure based on probabilities.
-*   **`BetaAgent`:** Uses Beta distributions to model beliefs about two theories (0 and 1).
-    *   `alphas_betas`: Stores `[alpha, beta]` for both theories.
-    *   `credences`: Mean of the beta distribution.
-    *   `choice`: Epsilon-greedy.
+*   **`Environment`:** The environment. 
+*   **`TD-Agent`:** The TD agent. If you think another agent would be better, please let me know.
 
 #### 3. Simulation Loop (`Model` class)
 *   **Step:**
-    1.  **Experiment:** Every agent chooses a theory and runs an experiment (getting success/failure).
-    2.  **Update:** Every agent observes the results of their **predecessors** (neighbors who point to them).
-    3.  **Bayesian Update:** Agents update their Alpha/Beta parameters based on their own *and* their neighbors' results.
+Autocomplete
 
 ### Key Files and Directories
 
 #### Directory Structure
-*   **`AI_AGENTS/`**: Contains context files (`.md`) and instructions for specific AI agent roles (e.g., `LINEARIZE_AGENT.md`). This is the primary mechanism for "context fine-tuning".
-*   **`empirical_networks/`**: Storage for empirical network datasets used in simulations.
-*   **`results_data_sets/`**: Output directory where simulation results (typically CSVs or pickled data) are saved.
-*   **`__pycache__/`**: Compiled Python bytecode (ignored by git).
+Autocomplete
 
 #### File Dependencies & Logic
-The project relies on a central imports file to manage dependencies across modules.
-*   **`imports.py`**: Imports all necessary external libraries (`numpy`, `scipy`, `networkx`, `pandas`, etc.) and sets up seeds. It is imported by `agents.py`, `model.py`, and simulation scripts.
+Autocomplete
 
 **Legacy/Reference Implementation:**
-*   **`agents.py`**: Defines the object-oriented agent classes:
-    *   `Bandit`: The environment returning experiment results.
-    *   `BetaAgent`: Bayesian learner using Beta distributions.
-    *   `BayesAgent`: Simplified Bayesian learner.
-*   **`model.py`**: Defines the `Model` class. It manages the graph (`self.network`), the list of agents, and the time loop (`run_simulation`). It handles the interaction between agents (observing neighbors).
-*   **`simulation_functions.py`**: Wrappers to initialize parameters (generating networks) and run the `Model`. Used for parallel execution.
+No legacy, project starts from scratch.
 
 **Vectorized Implementation (Fast):**
-*   **`vectorized_model.py`**: The high-performance, matrix-based replacement for `Model`. It stores agent states in NumPy arrays `(N, 2, 2)` instead of objects.
-*   **`vectorized_agents.py`**: Contains `VectorizedBandit` for batch processing of experiments.
-*   **`vectorized_simulation_functions.py`**: Wrappers for running `VectorizedModel`.
 
-**Network Handling:**
-*   **`network_generation.py`**: Functions to generate synthetic networks (e.g., `barabasi_albert_directed`, `directed_watts_strogatz`).
-*   **`network_utils.py`**: Helper functions for calculating network statistics and metrics.
+Make sure to vectorize whehever possible.
+Make sure to always explain how the vectorization captures the intended process.
+
+**User Interface:**
+Make sure there is some kind og interface for the human subjects to interact with the recommender agents and the environment. This can be a jupyter notebook maybe.
 
 **Testing & Verification:**
-*   **`unit_tests.py`**: Unit tests for the reference implementation (`agents.py`, `model.py`).
-*   **`test_vectorization.py`**: Regression tests ensuring `VectorizedModel` matches `Model`.
-*   **`basic_model_testing.ipynb`**: Visual verification notebook for the reference model.
-*   **`vectorized_basic_model_testing.ipynb`**: Visual verification notebook for the vectorized model.
+*   **`unit_tests.py`**: 
+*   **`test_vectorization.py`**: 
+*   **`basic_model_testing.ipynb`**: 
+*   **`vectorized_basic_model_testing.ipynb`**: 
