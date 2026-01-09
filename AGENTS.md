@@ -66,49 +66,60 @@ The project stes up the framwork for an experimental study to test how recommend
 This is done by making people play a game that involves reinforcement learning recommendations.
 Each game episode has 20 time steps.
 First nature draws a number p uniformly at random between zero or one.
-Second, this number is observed by two recommender agents (say (TD)Q-learning agents). They have two actions: recommend or not recommend.
+Second, this number is observed by two recommender agents (Deep Q-Learning agents). They have two actions: recommend or not recommend.
 Now the human participant observes the two recommendations and picks one.
-Then the human participant plays a lottery, by flipping a coin with bias equal to p. If the coin lands heads, and the agent chose a 'recommend', they get a payoff of +1 (if tails and 'not recommend' they also get a payoff of +1). Alternatively, they get +0 or -1.
-This goes over 20 time steps. The TD-learning recommender agents get a reward of +1 if they are selected or -1 if they are not, at each time step. 
+Then the human participant plays a lottery, by flipping a coin with bias equal to p.
+Payoff structure:
+- If the coin lands heads, and the agent chose a 'recommend', they get a payoff of +1.
+- If the coin lands tails, and the agent chose 'not recommend', they get a payoff of +1.
+- Otherwise (Heads + Not Recommend, or Tails + Recommend), they get +0.
+
+This goes over 20 time steps.
+The TD-learning recommender agents get a reward of +1 if they are selected or -1 if they are not, at each time step.
 The unbiased policy recommends when observing 1>=p>=0.5, and does 'not recommend' when 0.5>=p>=0.
 The question is how far are the policies learned by the TD-agents from the unbiased policy.
 
 ### Setup & Testing
-*   **Install Dependencies:** `pip install -r requirements.txt` (or manually install them).
-*   **Run Tests:** `python -m unittest unit_tests.py`
+*   **Install Dependencies:** `pip install -r requirements.txt`
+*   **Run Tests:** `pytest tests/`
 
 ### Key Architecture & Logic
 
 
 #### 2. Agents
-*   **`Environment`:** The environment. 
-*   **`TD-Agent`:** The TD agent. If you think another agent would be better, please let me know.
+*   **`src/environment.py`**: The environment logic (p generation, reward calculation).
+*   **`src/agents.py`**: The Deep Q-Learning (DQN) agent implementation using PyTorch.
 
-#### 3. Simulation Loop (`Model` class)
+#### 3. Simulation Loop (`src/simulation.py`)
 *   **Step:**
-Autocomplete
+    1.  Environment generates p.
+    2.  Agents observe p and output actions (Recommend/Not Recommend).
+    3.  Human (via Interface) observes Agent actions and selects one.
+    4.  Environment calculates outcome (Coin flip) and rewards.
+    5.  Agents update their replay buffers and perform a training step.
 
 ### Key Files and Directories
 
 #### Directory Structure
-Autocomplete
+*   `src/`: Contains the core logic.
+    *   `agents.py`: DQN Agent class.
+    *   `environment.py`: BanditEnvironment class.
+    *   `simulation.py`: GameSession class.
+*   `tests/`: Contains unit tests.
+*   `notebooks/`: Contains the user interface.
+    *   `experiment_interface.ipynb`: Interactive game for the human subject.
 
 #### File Dependencies & Logic
-Autocomplete
+`simulation.py` depends on `agents.py` and `environment.py`. The notebook depends on `simulation.py`.
 
 **Legacy/Reference Implementation:**
 No legacy, project starts from scratch.
 
 **Vectorized Implementation (Fast):**
-
-Make sure to vectorize whehever possible.
-Make sure to always explain how the vectorization captures the intended process.
+The DQN agents process the state `p` as a tensor. Training batches are processed in parallel using PyTorch.
 
 **User Interface:**
-Make sure there is some kind og interface for the human subjects to interact with the recommender agents and the environment. This can be a jupyter notebook maybe.
+The interface is provided via `ipywidgets` in `notebooks/experiment_interface.ipynb`, allowing the human subject to see recommendations and make choices.
 
 **Testing & Verification:**
-*   **`unit_tests.py`**: 
-*   **`test_vectorization.py`**: 
-*   **`basic_model_testing.ipynb`**: 
-*   **`vectorized_basic_model_testing.ipynb`**: 
+*   **`tests/test_mechanics.py`**: Verifies reward logic, buffer operations, and basic agent behavior.
