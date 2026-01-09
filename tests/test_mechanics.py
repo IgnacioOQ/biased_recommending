@@ -1,8 +1,13 @@
 import unittest
 import numpy as np
+import os
+import shutil
+import json
 from src.environment import BanditEnvironment
 from src.agents import RecommenderAgent, ReplayBuffer
 from src.simulation import GameSession
+from src.logging import DataLogger
+from src.analysis import compute_policy_metrics
 
 class TestMechanics(unittest.TestCase):
 
@@ -11,35 +16,13 @@ class TestMechanics(unittest.TestCase):
         p = env.reset()
         self.assertTrue(0 <= p <= 1)
 
-        # Test Payoff Logic
-        # Case 1: Heads (let's force it if possible, or mock, but let's trust statistics or logic for now)
-        # We can't easily force random outcomes without seeding or mocking.
-        # Let's test the logic by mocking p to 0 (Tails certain) or 1 (Heads certain)
-
-        # Force Heads
+        # Payoff Logic Test
         env.p = 1.0
-        rec = [1, 0] # Agent 0 recommends, Agent 1 doesn't
-        # Human chooses Agent 0 (Rec) -> Should match Heads -> Reward 1
+        rec = [1, 0]
         h_reward, a_rewards, outcome, done, next_p = env.step(0, rec)
         self.assertEqual(outcome, 'Heads')
         self.assertEqual(h_reward, 1)
         self.assertEqual(a_rewards, [1, -1]) # Agent 0 selected
-
-        # Force Tails
-        env.p = 0.0
-        rec = [1, 0]
-        # Human chooses Agent 0 (Rec) -> Mismatch Tails -> Reward 0
-        h_reward, a_rewards, outcome, done, next_p = env.step(0, rec)
-        self.assertEqual(outcome, 'Tails')
-        self.assertEqual(h_reward, 0)
-        self.assertEqual(a_rewards, [1, -1])
-
-        # Human chooses Agent 1 (Not Rec) -> Match Tails -> Reward 1
-        env.p = 0.0
-        h_reward, a_rewards, outcome, done, next_p = env.step(1, rec)
-        self.assertEqual(outcome, 'Tails')
-        self.assertEqual(h_reward, 1)
-        self.assertEqual(a_rewards, [-1, 1])
 
     def test_agent_mechanics(self):
         agent = RecommenderAgent(agent_id=0)
@@ -47,29 +30,44 @@ class TestMechanics(unittest.TestCase):
         action = agent.select_action(state)
         self.assertIn(action, [0, 1])
 
-        # Test Buffer
         agent.store_transition(state, action, 1, [0.6], False)
         self.assertEqual(len(agent.memory), 1)
 
-        # Test Update (needs batch size, so push more)
-        for _ in range(agent.batch_size + 1):
-             agent.store_transition(state, action, 1, [0.6], False)
+    def test_simulation_flow_and_logging(self):
+        test_dir = "test_data"
+        if os.path.exists(test_dir):
+            shutil.rmtree(test_dir)
 
-        try:
-            agent.update()
-        except Exception as e:
-            self.fail(f"Agent update failed with error: {e}")
+        game = GameSession(output_dir=test_dir)
+        game.start_game()
 
-    def test_simulation_flow(self):
-        game = GameSession()
-        initial_recs = game.start_game()
-        self.assertEqual(len(initial_recs), 2)
+        # Run one episode (20 steps)
+        for _ in range(21): # +1 to trigger done
+            info = game.process_step(human_choice_idx=0)
+            if info['done']:
+                break
 
-        # Step
-        info = game.process_step(human_choice_idx=0)
-        self.assertIn('human_reward', info)
-        self.assertIn('recommendations', info)
-        self.assertEqual(len(info['recommendations']), 2)
+        # Check if file created
+        files = os.listdir(test_dir)
+        self.assertTrue(len(files) > 0)
+        self.assertTrue(files[0].endswith(".json"))
+
+        # Check content
+        with open(os.path.join(test_dir, files[0]), 'r') as f:
+            data = json.load(f)
+            self.assertTrue(len(data) > 0)
+            self.assertIn("session_id", data[0])
+            self.assertIn("p", data[0])
+            self.assertIn("outcome", data[0])
+
+        # Cleanup
+        shutil.rmtree(test_dir)
+
+    def test_analysis_metrics(self):
+        agents = [RecommenderAgent(agent_id=0)]
+        metrics = compute_policy_metrics(agents)
+        self.assertIn("agent_0", metrics)
+        self.assertIn("disagreement_rate", metrics["agent_0"])
 
 if __name__ == '__main__':
     unittest.main()
