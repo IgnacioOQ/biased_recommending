@@ -1,10 +1,10 @@
 import numpy as np
 
 class BanditEnvironment:
-    def __init__(self):
+    def __init__(self, max_steps=20):
         self.p = None
         self.steps = 0
-        self.max_steps = 20
+        self.max_steps = max_steps
 
     def reset(self):
         self.steps = 0

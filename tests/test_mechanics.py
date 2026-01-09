@@ -55,10 +55,15 @@ class TestMechanics(unittest.TestCase):
         # Check content
         with open(os.path.join(test_dir, files[0]), 'r') as f:
             data = json.load(f)
-            self.assertTrue(len(data) > 0)
-            self.assertIn("session_id", data[0])
-            self.assertIn("p", data[0])
-            self.assertIn("outcome", data[0])
+            self.assertIn("session_meta", data)
+            self.assertIn("episodes", data)
+            self.assertTrue(len(data["episodes"]) > 0)
+
+            # Check first step of first episode
+            first_step = data["episodes"][0][0]
+            self.assertIn("session_id", first_step)
+            self.assertIn("p", first_step)
+            self.assertIn("outcome", first_step)
 
         # Cleanup
         shutil.rmtree(test_dir)
