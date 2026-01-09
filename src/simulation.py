@@ -5,15 +5,15 @@ from src.analysis import compute_policy_metrics
 import numpy as np
 
 class GameSession:
-    def __init__(self, num_episodes=1000, output_dir="data"):
-        self.env = BanditEnvironment()
+    def __init__(self, num_episodes=1000, output_dir="data", steps_per_episode=20):
+        self.env = BanditEnvironment(max_steps=steps_per_episode)
         self.agents = [RecommenderAgent(agent_id=0), RecommenderAgent(agent_id=1)]
         self.current_state = None
         self.current_recommendations = []
         self.episode_count = 0
         self.total_episodes = num_episodes
         self.is_active = False
-        self.logger = DataLogger(output_dir=output_dir)
+        self.logger = DataLogger(output_dir=output_dir, max_steps=steps_per_episode)
 
     def start_game(self):
         """Starts a new game session (resetting everything not persistent if needed, or just starting loop)."""

@@ -4,7 +4,7 @@
 This project establishes a framework for an experimental study investigating how recommender systems can exploit human biases. It involves a game where human participants receive recommendations from two Deep Q-Learning agents.
 
 **Game Mechanics:**
-- Each episode consists of 20 time steps.
+- Each episode consists of a fixed number of time steps (default 20, but configurable in the notebook).
 - At each step, Nature draws a bias probability `p` (0 to 1).
 - Two agents observe `p` and choose to "Recommend" or "Not Recommend".
 - The human participant observes the recommendations and chooses an agent to follow.
@@ -24,20 +24,36 @@ To run the experiment:
     -   Install dependencies (`pip install -r requirements.txt`).
     -   Mount your Google Drive (`drive.mount('/content/drive')`).
 3.  The notebook sets a `dumping_path` for data storage. Ensure this path exists in your Google Drive or update it as needed.
+4.  You can configure the number of steps per episode using the `TOTAL_STEPS` variable in the Setup section.
 
 ## Data Generation and Storage
-Experimental data is generated during the gameplay session and stored as JSON files.
+Experimental data is generated during the gameplay session and stored as a single JSON file per session.
 
 **Mechanism:**
 1.  **Buffering**: As the game proceeds, data for each step is buffered in memory within the `DataLogger` class (`src/logging.py`).
-2.  **Saving**: At the end of each episode (when the `done` flag is received from the environment), the buffered data is written to a JSON file.
-3.  **File Naming**: Files are named using the format `{session_id}_ep{episode_num}.json`.
+2.  **Saving**: At the end of each episode (when the `done` flag is received from the environment), the session file is updated to include the completed episode.
+3.  **File Naming**: The file is named `{session_id}.json`.
 4.  **Storage Location**: By default, data is saved to the `data/` directory locally, or the path specified by the user in the notebook (e.g., Google Drive).
 
 **JSON Structure:**
-Each JSON file contains a list of dictionaries, where each dictionary represents a single time step in the episode.
+The JSON file is a dictionary with two main keys: `session_meta` and `episodes`.
 
-**Field Descriptions:**
+```json
+{
+  "session_meta": {
+    "session_id": "sessionid_...",
+    "total_number_of_steps_in_episode": 20,
+    "start_time": "2023-..."
+  },
+  "episodes": [
+    [ ... list of step dictionaries for Episode 0 ... ],
+    [ ... list of step dictionaries for Episode 1 ... ]
+  ]
+}
+```
+
+**Step Dictionary Fields:**
+Each item in the `episodes` list is itself a list of step dictionaries. Each step dictionary contains:
 -   `session_id`: Unique identifier for the game session.
 -   `timestamp`: ISO format timestamp of the event.
 -   `episode`: The current episode number.
