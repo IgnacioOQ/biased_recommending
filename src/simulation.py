@@ -1,9 +1,11 @@
 from src.agents import RecommenderAgent
 from src.environment import BanditEnvironment
+from src.logging import DataLogger
+from src.analysis import compute_policy_metrics
 import numpy as np
 
 class GameSession:
-    def __init__(self, num_episodes=1000):
+    def __init__(self, num_episodes=1000, output_dir="data"):
         self.env = BanditEnvironment()
         self.agents = [RecommenderAgent(agent_id=0), RecommenderAgent(agent_id=1)]
         self.current_state = None
@@ -11,6 +13,7 @@ class GameSession:
         self.episode_count = 0
         self.total_episodes = num_episodes
         self.is_active = False
+        self.logger = DataLogger(output_dir=output_dir)
 
     def start_game(self):
         """Starts a new game session (resetting everything not persistent if needed, or just starting loop)."""
@@ -41,12 +44,25 @@ class GameSession:
         if not self.is_active:
             raise ValueError("Game is not active. Call start_game() first.")
 
+        # Capture pre-step state for logging
+        current_p = self.current_state
+
         # 1. Step Environment
         human_reward, agent_rewards, outcome_str, done, next_p = self.env.step(human_choice_idx, self.current_recommendations)
 
+        # Log Step
+        self.logger.log_step(
+            episode=self.episode_count,
+            step=self.env.steps,
+            p=current_p,
+            recommendations=self.current_recommendations,
+            human_choice=human_choice_idx,
+            human_reward=human_reward,
+            agent_rewards=agent_rewards,
+            outcome=outcome_str
+        )
+
         # 2. Train Agents
-        # For each agent, store transition and update
-        # Transition: (state, action, reward, next_state, done)
         for i, agent in enumerate(self.agents):
             agent.store_transition(
                 np.array([self.current_state]),
@@ -58,18 +74,22 @@ class GameSession:
             agent.update()
 
         # 3. Update State
-        prev_state = self.current_state
         self.current_state = next_p
 
         # 4. Handle Episode End
         new_episode_started = False
+        metrics = None
         if done:
+            # Save Data
+            self.logger.save_episode()
+
+            # Compute Analysis
+            metrics = compute_policy_metrics(self.agents)
+
             self.episode_count += 1
-            # Update target networks periodically (e.g., every episode for simplicity)
             for agent in self.agents:
                 agent.update_target_network()
 
-            # Reset environment for next episode
             self.current_state = self.env.reset()
             new_episode_started = True
 
@@ -80,9 +100,10 @@ class GameSession:
             "human_reward": human_reward,
             "agent_rewards": agent_rewards,
             "outcome": outcome_str,
-            "done": done, # Episode finished
-            "next_p": self.current_state, # Hidden from human, but good for debug
+            "done": done,
+            "next_p": self.current_state,
             "recommendations": next_recommendations,
             "new_episode": new_episode_started,
-            "episode_count": self.episode_count
+            "episode_count": self.episode_count,
+            "metrics": metrics
         }
