@@ -92,9 +92,14 @@ class AdvancedGameSession(GameSession):
         # 4. Handle Episode End
         new_episode_started = False
         metrics = None
+        finished_episode_history = None
+
         if done:
             self.logger.save_episode()
             metrics = compute_advanced_policy_metrics(self.agents)
+            # Capture history before reset
+            finished_episode_history = self.env.episode_history
+
             self.episode_count += 1
             for agent in self.agents:
                 agent.update_target_network()
@@ -115,5 +120,6 @@ class AdvancedGameSession(GameSession):
             "recommendations": next_recommendations,
             "new_episode": new_episode_started,
             "episode_count": self.episode_count,
-            "metrics": metrics
+            "metrics": metrics,
+            "finished_episode_history": finished_episode_history
         }

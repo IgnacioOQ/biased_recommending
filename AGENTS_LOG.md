@@ -21,3 +21,10 @@
 **Summary:** Fixed NameError in `advanced_experiment_interface.ipynb`.
 - **Issue:** The variable `ep_id` was used in a print statement but was undefined in the new JSON saving block.
 - **Fix:** Removed the erroneous print statement and cleanup old comments. Validated that the correct logging uses `current_step_info['episode_count']`.
+
+### Bug Fix: Empty Episode History
+**Date:** 2024-05-22
+**Summary:** Fixed issue where saved JSON history was empty.
+- **Issue:** `game.env.episode_history` was being accessed after `env.reset()` was called (which wipes the history).
+- **Fix:** Modified `src/advanced_simulation.py` to capture `episode_history` before reset and return it in `process_step` result as `finished_episode_history`.
+- **Notebook:** Updated `advanced_experiment_interface.ipynb` to save `current_step_info['finished_episode_history']` instead of the live (reset) environment property.
