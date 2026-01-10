@@ -3,7 +3,7 @@ from src.simulation import GameSession
 from src.advanced_environment import AdvancedBanditEnvironment
 from src.advanced_agents import AdvancedRecommenderAgent
 from src.logging import DataLogger
-from src.analysis import compute_policy_metrics
+from src.advanced_analysis import compute_advanced_policy_metrics
 
 class AdvancedGameSession(GameSession):
     def __init__(self, num_episodes=1000, output_dir="data", steps_per_episode=20):
@@ -94,7 +94,7 @@ class AdvancedGameSession(GameSession):
         metrics = None
         if done:
             self.logger.save_episode()
-            metrics = compute_policy_metrics(self.agents)
+            metrics = compute_advanced_policy_metrics(self.agents)
             self.episode_count += 1
             for agent in self.agents:
                 agent.update_target_network()
