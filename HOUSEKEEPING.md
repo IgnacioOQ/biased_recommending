@@ -10,25 +10,32 @@
 
 ## Dependency Network
 
-Based on import analysis:
-- `src/logging.py`: Imports standard libraries (uuid, json, os, datetime) and numpy.
-- `src/analysis.py`: Imports numpy.
-- `src/environment.py`: Imports numpy.
-- `src/agents.py`: Imports numpy, torch (nn, optim), random, collections.deque.
-- `src/simulation.py`: Depends on `src.agents`, `src.environment`, `src.logging`, `src.analysis`, and numpy.
-- `tests/test_mechanics.py`: Depends on all `src` modules (`agents`, `environment`, `simulation`, `logging`, `analysis`) and standard libraries/numpy.
-- `notebooks/`: Imports `src` modules via `simulation.py` (based on typical usage patterns, confirmed by `simulation.py` dependencies).
+Based on updated import analysis (including advanced modules):
+- **Core Modules:**
+  - `src/logging.py`: Standard libs, numpy.
+  - `src/analysis.py`: numpy.
+  - `src/environment.py`: numpy.
+  - `src/agents.py`: numpy, torch, random, collections.
+  - `src/simulation.py`: Depends on `src.agents`, `src.environment`, `src.logging`, `src.analysis`.
+- **Advanced Modules:**
+  - `src/advanced_environment.py`: Inherits `src.environment`.
+  - `src/advanced_agents.py`: Inherits `src.agents`.
+  - `src/advanced_analysis.py`: Depends on numpy, torch.
+  - `src/advanced_simulation.py`: Depends on advanced modules + `src.simulation` + `src.logging`.
+- **Tests:**
+  - `tests/test_mechanics.py`: Covers core modules.
+  - `tests/advanced_test_mechanics.py`: Covers advanced modules.
+- **Notebooks:**
+  - `notebooks/experiment_interface.ipynb`: Uses `src.simulation`.
+  - `notebooks/advanced_experiment_interface.ipynb`: Uses `src.advanced_simulation`.
 
 ## Latest Report
 
-```
-============================= test session starts ==============================
-platform linux -- Python 3.12.12, pytest-9.0.2, pluggy-1.6.0
-rootdir: /app
-plugins: anyio-4.12.1
-collected 4 items
+**Execution Date:** 2024-05-22
 
-tests/test_mechanics.py ....                                             [100%]
+**Test Results:**
+1. `tests/test_mechanics.py`: **Passed** (4 tests).
+2. `tests/advanced_test_mechanics.py`: **Passed** (5 tests).
 
-============================== 4 passed in 2.22s ===============================
-```
+**Summary:**
+All core and advanced component tests passed. The dependency graph shows clear inheritance and modular extension for the advanced features.
