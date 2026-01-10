@@ -28,3 +28,9 @@
 - **Issue:** `game.env.episode_history` was being accessed after `env.reset()` was called (which wipes the history).
 - **Fix:** Modified `src/advanced_simulation.py` to capture `episode_history` before reset and return it in `process_step` result as `finished_episode_history`.
 - **Notebook:** Updated `advanced_experiment_interface.ipynb` to save `current_step_info['finished_episode_history']` instead of the live (reset) environment property.
+
+### Feat: Notebook Layout and Metadata
+**Date:** 2024-05-22
+**Summary:** Adjusted notebook UI and added data structure metadata.
+- **Layout:** Moved the performance plot below the 'Next Step' button in `advanced_experiment_interface.ipynb`.
+- **Metadata:** Added `data_structure` key to the JSON output `session_meta` explaining the quintuple format.
