@@ -5,8 +5,11 @@ import numpy as np
 from datetime import datetime
 
 class DataLogger:
-    def __init__(self, output_dir="data", max_steps=20):
-        self.session_id = f"sessionid_{uuid.uuid4()}"
+    def __init__(self, output_dir="data", max_steps=20, session_id=None):
+        if session_id:
+            self.session_id = session_id
+        else:
+            self.session_id = f"sessionid_{uuid.uuid4()}"
         self.output_dir = output_dir
         self.episode_buffer = []
         self.max_steps = max_steps
