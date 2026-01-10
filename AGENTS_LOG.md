@@ -34,3 +34,9 @@
 **Summary:** Adjusted notebook UI and added data structure metadata.
 - **Layout:** Moved the performance plot below the 'Next Step' button in `advanced_experiment_interface.ipynb`.
 - **Metadata:** Added `data_structure` key to the JSON output `session_meta` explaining the quintuple format.
+
+### Fix: Robust Notebook Setup
+**Date:** 2024-05-22
+**Summary:** Updated `advanced_experiment_interface.ipynb` setup cell.
+- **Issue:** Potential for nested cloning if setup cell is re-run (`biased_recommending/biased_recommending`).
+- **Fix:** Added checks to skip `git clone` if the directory exists and to verify current working directory before switching context. Used the specific working branch for cloning.
