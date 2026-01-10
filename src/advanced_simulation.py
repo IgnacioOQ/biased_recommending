@@ -6,14 +6,14 @@ from src.logging import DataLogger
 from src.advanced_analysis import compute_advanced_policy_metrics
 
 class AdvancedGameSession(GameSession):
-    def __init__(self, num_episodes=1000, output_dir="data", steps_per_episode=20):
+    def __init__(self, num_episodes=1000, output_dir="data", steps_per_episode=20, session_id=None):
         super().__init__(num_episodes, output_dir, steps_per_episode)
         # Override environment with AdvancedBanditEnvironment
         self.env = AdvancedBanditEnvironment(max_steps=steps_per_episode)
         # Override agents with AdvancedRecommenderAgent
         self.agents = [AdvancedRecommenderAgent(agent_id=0), AdvancedRecommenderAgent(agent_id=1)]
         # Re-initialize logger to match the session parameters (optional, but good for safety)
-        self.logger = DataLogger(output_dir=output_dir, max_steps=steps_per_episode)
+        self.logger = DataLogger(output_dir=output_dir, max_steps=steps_per_episode, session_id=session_id)
 
     def start_game(self):
         """Starts a new game session using advanced logic."""
