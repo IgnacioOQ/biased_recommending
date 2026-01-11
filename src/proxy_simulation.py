@@ -7,6 +7,7 @@ from src.advanced_environment import AdvancedBanditEnvironment
 from src.advanced_agents import AdvancedRecommenderAgent
 from src.human_proxy_agent import HumanProxyAgent
 from src.logging import DataLogger
+from src.advanced_analysis import compute_advanced_policy_metrics
 
 # Helper for JSON serialization
 class NumpyEncoder(json.JSONEncoder):
@@ -41,6 +42,9 @@ class ProxySimulation:
 
         # Human Proxy History Buffer (per episode)
         self.human_proxy_history = []
+
+        # Metrics History
+        self.metrics_history = []
 
         # Session Data Storage (Growing JSON)
         self.history_filepath = os.path.join(output_dir, f"proxy_simulation_history_{self.session_id}.json")
@@ -172,8 +176,14 @@ class ProxySimulation:
             # Save History
             self._save_episode_history(self.env.episode_history, self.human_proxy_history)
 
+            # Compute and Store Metrics
+            metrics = compute_advanced_policy_metrics(self.recommenders)
+            self.metrics_history.append(metrics)
+
             if (episode + 1) % 10 == 0:
                 print(f"Episode {episode+1}/{self.num_episodes} completed.")
+
+        return self.metrics_history
 
 if __name__ == "__main__":
     sim = ProxySimulation(num_episodes=5, output_dir="data")
