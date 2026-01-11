@@ -49,3 +49,9 @@
   - `tests/test_mechanics.py`: 4/4 Passed.
   - `tests/advanced_test_mechanics.py`: 5/5 Passed.
 - **Conclusion:** Project state is consistent and functional.
+
+### Feat: Accumulated Accuracy Table
+**Date:** 2024-05-22
+**Summary:** Added real-time accuracy table to notebook interface.
+- **Feature:** Displays True Positive Rate (TPR) and True Negative Rate (TNR) for both agents, accumulated over the session.
+- **Layout:** Positioned to the right of the performance plot.
