@@ -55,3 +55,9 @@
 **Summary:** Added real-time accuracy table to notebook interface.
 - **Feature:** Displays True Positive Rate (TPR) and True Negative Rate (TNR) for both agents, accumulated over the session.
 - **Layout:** Positioned to the right of the performance plot.
+
+### Feat: Human Proxy Simulation
+**Date:** 2024-05-22
+**Summary:** Implemented automated proxy simulation.
+- **Components:** `HumanProxyAgent`, `ProxySimulation`.
+- **Report:** Created `notebooks/proxy_simulation_report.ipynb` featuring plots for Agent Policy Accuracy (vs Unbiased) and Average Human Proxy Reward.
