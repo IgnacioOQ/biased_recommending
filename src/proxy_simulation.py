@@ -46,6 +46,9 @@ class ProxySimulation:
         # Metrics History
         self.metrics_history = []
 
+        # Human Rewards History
+        self.human_reward_history = []
+
         # Session Data Storage (Growing JSON)
         self.history_filepath = os.path.join(output_dir, f"proxy_simulation_history_{self.session_id}.json")
         self._init_history_file()
@@ -180,10 +183,19 @@ class ProxySimulation:
             metrics = compute_advanced_policy_metrics(self.recommenders)
             self.metrics_history.append(metrics)
 
+            # Compute Human Rewards
+            # history is list of (obs, choice, reward, next_obs, done)
+            rewards = [step[2] for step in self.human_proxy_history]
+            avg_reward = np.mean(rewards) if rewards else 0.0
+            self.human_reward_history.append(avg_reward)
+
             if (episode + 1) % 10 == 0:
                 print(f"Episode {episode+1}/{self.num_episodes} completed.")
 
-        return self.metrics_history
+        return {
+            "metrics": self.metrics_history,
+            "human_rewards": self.human_reward_history
+        }
 
 if __name__ == "__main__":
     sim = ProxySimulation(num_episodes=5, output_dir="data")
