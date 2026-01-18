@@ -89,3 +89,14 @@
   - `DELETE /api/simulation/{session_id}` - cleanup
 - **Dependencies:** Added `fastapi` and `uvicorn[standard]` to requirements.txt
 - **Tests:** All 33 tests pass (17 API + 16 engine)
+
+### Housekeeping Report
+**Date:** 2026-01-18
+**Summary:** Executed full housekeeping protocol.
+- **Dependency Network:** Updated to include engine and API modules. Clear layering: core → advanced → engine → API.
+- **Tests:** All 38 tests passed in 4.72s.
+  - `tests/test_api.py`: 17 passed
+  - `tests/test_engine.py`: 16 passed
+  - `tests/test_mechanics.py`: 4 passed
+  - `tests/test_proxy_simulation.py`: 1 passed
+- **Conclusion:** Project state is consistent and functional.
