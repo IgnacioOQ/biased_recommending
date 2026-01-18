@@ -4,3 +4,4 @@ ipywidgets
 matplotlib
 pytest
 jupyter
+pydantic

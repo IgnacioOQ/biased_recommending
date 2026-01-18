@@ -61,3 +61,15 @@
 **Summary:** Implemented automated proxy simulation.
 - **Components:** `HumanProxyAgent`, `ProxySimulation`.
 - **Report:** Created `notebooks/proxy_simulation_report.ipynb` featuring plots for Agent Policy Accuracy (vs Unbiased) and Average Human Proxy Reward.
+
+### Feat: Modular Engine Architecture
+**Date:** 2026-01-18
+**Summary:** Refactored simulation logic into `src/engine/` with Pydantic models.
+- **New Files:**
+  - `src/engine/config.py`: `SimulationConfig` for all hyperparameters (alpha, beta, num_agents, etc.)
+  - `src/engine/state.py`: `SimulationState`, `AgentBelief`, `AgentAccuracy` models
+  - `src/engine/model.py`: `RecommenderSystem` class with `step()` and `get_metrics()` methods
+  - `tests/test_engine.py`: 16 unit tests for engine module
+- **Design:** No matplotlib/plotting in engine - pure computation only
+- **Compatibility:** Pydantic v2 with `ConfigDict`, all 21 tests pass
+- **Notebook:** `advanced_experiment_interface.ipynb` unchanged for sanity checks
