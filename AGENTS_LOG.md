@@ -73,3 +73,19 @@
 - **Design:** No matplotlib/plotting in engine - pure computation only
 - **Compatibility:** Pydantic v2 with `ConfigDict`, all 21 tests pass
 - **Notebook:** `advanced_experiment_interface.ipynb` unchanged for sanity checks
+
+### Feat: FastAPI Wrapper
+**Date:** 2026-01-18
+**Summary:** Built REST API wrapper for the simulation engine.
+- **New Files:**
+  - `src/api/session.py`: `SessionStore` singleton for in-memory session management
+  - `src/api/routes.py`: 4 endpoints (create, step, state, delete) with 404 error handling
+  - `src/api/main.py`: FastAPI app entry point
+  - `tests/test_api.py`: 17 unit tests for API module
+- **Endpoints:**
+  - `POST /api/simulation` - create session with optional config
+  - `POST /api/simulation/{session_id}/step?steps=N` - run N steps
+  - `GET /api/simulation/{session_id}/state` - get SimulationState
+  - `DELETE /api/simulation/{session_id}` - cleanup
+- **Dependencies:** Added `fastapi` and `uvicorn[standard]` to requirements.txt
+- **Tests:** All 33 tests pass (17 API + 16 engine)
