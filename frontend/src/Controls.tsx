@@ -3,11 +3,6 @@ import './Controls.css'
 
 // TypeScript interfaces
 interface SimulationConfig {
-    alpha: number
-    beta: number
-    epsilon: number
-    epsilon_decay: number
-    epsilon_min: number
     steps_per_episode: number
 }
 
@@ -20,6 +15,7 @@ interface GameState {
     step: number
     game_over: boolean
     cumulative_human_reward: number
+    cumulative_agent_rewards: number[]
 }
 
 interface StepResult {
@@ -32,16 +28,15 @@ interface StepResult {
     current_p: number
     step: number
     episode: number
+    human_choice: number
+    agent_correctness: boolean[]
+    cumulative_agent_rewards: number[]
 }
 
 function Controls() {
     // Configuration state
-    const [config, setConfig] = useState<SimulationConfig>({
-        alpha: 0.001,
-        beta: 0.99,
-        epsilon: 1.0,
-        epsilon_decay: 0.995,
-        epsilon_min: 0.01,
+    // Default config values are now handled by the backend
+    const [config] = useState<SimulationConfig>({
         steps_per_episode: 20,
     })
 
@@ -62,11 +57,7 @@ function Controls() {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    alpha: config.alpha,
-                    beta: config.beta,
-                    epsilon: config.epsilon,
-                    epsilon_decay: config.epsilon_decay,
-                    epsilon_min: config.epsilon_min,
+                    // We rely on backend defaults for RL hyperparameters
                     steps_per_episode: config.steps_per_episode,
                 }),
             })
@@ -85,6 +76,7 @@ function Controls() {
                 step: data.state.step,
                 game_over: false,
                 cumulative_human_reward: 0,
+                cumulative_agent_rewards: data.state.cumulative_agent_rewards || [0, 0],
             })
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Failed to start simulation')
@@ -125,6 +117,9 @@ function Controls() {
                 current_p: result.next_p,
                 step: result.done ? 0 : state.step + 1,
                 episode: result.episode_count,
+                human_choice: result.human_choice,
+                agent_correctness: result.agent_correctness,
+                cumulative_agent_rewards: result.cumulative_agent_rewards,
             })
 
             setState(prev => prev ? {
@@ -134,6 +129,7 @@ function Controls() {
                 step: result.done ? 0 : prev.step + 1,
                 episode: result.episode_count,
                 cumulative_human_reward: prev.cumulative_human_reward + result.human_reward,
+                cumulative_agent_rewards: result.cumulative_agent_rewards,
             } : null)
 
         } catch (err) {
@@ -154,56 +150,11 @@ function Controls() {
 
     return (
         <div className="controls-container">
-            {/* Configuration Panel - shown when no game is active */}
+            {/* Start Panel - shown when no game is active */}
             {!state && (
                 <div className="config-panel">
-                    <h2>⚙️ Configuration</h2>
-                    <div className="config-grid">
-                        <div className="config-item">
-                            <label>Learning Rate (α)</label>
-                            <input
-                                type="number"
-                                step="0.0001"
-                                min="0"
-                                max="1"
-                                value={config.alpha}
-                                onChange={e => setConfig(prev => ({ ...prev, alpha: parseFloat(e.target.value) }))}
-                            />
-                        </div>
-                        <div className="config-item">
-                            <label>Discount Factor (β)</label>
-                            <input
-                                type="number"
-                                step="0.01"
-                                min="0"
-                                max="1"
-                                value={config.beta}
-                                onChange={e => setConfig(prev => ({ ...prev, beta: parseFloat(e.target.value) }))}
-                            />
-                        </div>
-                        <div className="config-item">
-                            <label>Initial Epsilon (ε)</label>
-                            <input
-                                type="number"
-                                step="0.1"
-                                min="0"
-                                max="1"
-                                value={config.epsilon}
-                                onChange={e => setConfig(prev => ({ ...prev, epsilon: parseFloat(e.target.value) }))}
-                            />
-                        </div>
-                        <div className="config-item">
-                            <label>Steps per Episode</label>
-                            <input
-                                type="number"
-                                step="1"
-                                min="1"
-                                max="100"
-                                value={config.steps_per_episode}
-                                onChange={e => setConfig(prev => ({ ...prev, steps_per_episode: parseInt(e.target.value) }))}
-                            />
-                        </div>
-                    </div>
+                    <h2>🎲 Start Experiment</h2>
+                    <p>Click below to begin the recommendation game.</p>
                     <button
                         className="start-button"
                         onClick={startSimulation}
@@ -232,38 +183,37 @@ function Controls() {
                         </div>
                     </div>
 
-                    {/* Current P Value */}
-                    <div className="p-display">
-                        <h3>Current Probability (p)</h3>
-                        <div className="p-value">{state.current_p.toFixed(3)}</div>
-                        <div className="p-bar">
-                            <div
-                                className="p-fill"
-                                style={{ width: `${state.current_p * 100}%` }}
-                            />
-                        </div>
-                        <p className="p-hint">
-                            {state.current_p >= 0.5
-                                ? '📈 p ≥ 0.5: Unbiased policy would RECOMMEND'
-                                : '📉 p < 0.5: Unbiased policy would NOT RECOMMEND'}
-                        </p>
-                    </div>
-
                     {/* Agent Cards */}
                     <div className="agents-container">
-                        {[0, 1].map(agentIdx => (
-                            <div key={agentIdx} className="agent-card">
-                                <h3>Agent {agentIdx}</h3>
-                                {renderRecommendation(state.recommendations[agentIdx])}
-                                <button
-                                    className="choice-button"
-                                    onClick={() => makeChoice(agentIdx)}
-                                    disabled={loading}
-                                >
-                                    {loading ? '⏳' : `Choose Agent ${agentIdx}`}
-                                </button>
-                            </div>
-                        ))}
+                        {[0, 1].map(agentIdx => {
+                            const isLastPicked = lastResult?.human_choice === agentIdx
+                            const lastCorrect = lastResult?.agent_correctness?.[agentIdx]
+
+                            return (
+                                <div key={agentIdx} className={`agent-card ${isLastPicked ? 'picked' : ''}`}>
+                                    <div className="agent-header">
+                                        <h3>Agent {agentIdx}</h3>
+                                        <span className="agent-score">Score: {state.cumulative_agent_rewards[agentIdx].toFixed(1)}</span>
+                                    </div>
+
+                                    {renderRecommendation(state.recommendations[agentIdx])}
+
+                                    {lastResult && !lastResult.new_episode && (
+                                        <div className={`agent-feedback ${lastCorrect ? 'correct' : 'incorrect'}`}>
+                                            Last Rec: {lastCorrect ? '✅ Good' : '❌ Bad'}
+                                        </div>
+                                    )}
+
+                                    <button
+                                        className="choice-button"
+                                        onClick={() => makeChoice(agentIdx)}
+                                        disabled={loading}
+                                    >
+                                        {loading ? '⏳' : `Choose Agent ${agentIdx}`}
+                                    </button>
+                                </div>
+                            )
+                        })}
                     </div>
 
                     {/* Last Result */}

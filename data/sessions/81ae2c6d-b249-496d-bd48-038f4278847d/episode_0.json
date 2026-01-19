@@ -1,0 +1,67 @@
+[
+  {
+    "t": 0,
+    "p": 0.8789869546890259,
+    "rec_agent_0": 0,
+    "rec_agent_1": 1,
+    "human_choice": 0,
+    "agent_0_payoff": 1.0,
+    "agent_1_payoff": -1.0,
+    "outcome": "Heads",
+    "human_payoff": 0.0,
+    "t_next": 1,
+    "done": false
+  },
+  {
+    "t": 1,
+    "p": 0.2778426706790924,
+    "rec_agent_0": 1,
+    "rec_agent_1": 0,
+    "human_choice": 0,
+    "agent_0_payoff": 1.0,
+    "agent_1_payoff": -1.0,
+    "outcome": "Tails",
+    "human_payoff": 0.0,
+    "t_next": 2,
+    "done": false
+  },
+  {
+    "t": 2,
+    "p": 0.14530061185359955,
+    "rec_agent_0": 1,
+    "rec_agent_1": 0,
+    "human_choice": 0,
+    "agent_0_payoff": 1.0,
+    "agent_1_payoff": -1.0,
+    "outcome": "Heads",
+    "human_payoff": 1.0,
+    "t_next": 3,
+    "done": false
+  },
+  {
+    "t": 3,
+    "p": 0.7123284339904785,
+    "rec_agent_0": 1,
+    "rec_agent_1": 0,
+    "human_choice": 0,
+    "agent_0_payoff": 1.0,
+    "agent_1_payoff": -1.0,
+    "outcome": "Tails",
+    "human_payoff": 0.0,
+    "t_next": 4,
+    "done": false
+  },
+  {
+    "t": 4,
+    "p": 0.22385944426059723,
+    "rec_agent_0": 0,
+    "rec_agent_1": 1,
+    "human_choice": 0,
+    "agent_0_payoff": 1.0,
+    "agent_1_payoff": -1.0,
+    "outcome": "Tails",
+    "human_payoff": 1.0,
+    "t_next": 5,
+    "done": true
+  }
+]

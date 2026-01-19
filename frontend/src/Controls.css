@@ -202,6 +202,50 @@
 .agent-card h3 {
     font-size: 1.2rem;
     color: var(--text-primary);
+    margin: 0;
+}
+
+.agent-card.picked {
+    border-color: var(--accent-secondary);
+    box-shadow: 0 0 15px rgba(0, 153, 255, 0.1);
+}
+
+.agent-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+.agent-score {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    background: var(--bg-secondary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+}
+
+.agent-feedback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: 8px;
+    width: 100%;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin: 0.5rem 0;
+}
+
+.agent-feedback.correct {
+    background: rgba(0, 255, 136, 0.1);
+    color: var(--accent-primary);
+}
+
+.agent-feedback.incorrect {
+    background: rgba(255, 68, 68, 0.1);
+    color: var(--accent-warning);
 }
 
 /* Recommendation Badge */

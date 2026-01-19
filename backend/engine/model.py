@@ -9,6 +9,9 @@ from typing import Any, Dict, List, Optional
 
 import numpy as np
 import torch
+import json
+import os
+import time
 
 from backend.advanced_agents import AdvancedRecommenderAgent
 from backend.advanced_environment import AdvancedBanditEnvironment
@@ -68,12 +71,22 @@ class RecommenderSystem:
 
         # Reward tracking
         self.cumulative_human_reward: float = 0.0
+        self.cumulative_agent_rewards: List[float] = [0.0] * config.num_agents
 
+        # Accuracy tracking (TPR/TNR per agent)
         # Accuracy tracking (TPR/TNR per agent)
         self.agent_stats: Dict[int, Dict[str, int]] = {
             i: {"tp": 0, "rec_count": 0, "tn": 0, "not_rec_count": 0}
             for i in range(config.num_agents)
         }
+
+        # Session and Logging
+        self.session_id: Optional[str] = None
+        self.current_episode_history: List[Dict] = []
+        
+    def set_session_id(self, session_id: str):
+        """Set the session ID for data logging."""
+        self.session_id = session_id
 
     def reset(self) -> List[int]:
         """
@@ -84,6 +97,7 @@ class RecommenderSystem:
         """
         self.current_state = self.env.reset()
         self.is_active = True
+        self.cumulative_agent_rewards = [0.0] * self.config.num_agents
         return self._get_recommendations()
 
     def _get_recommendations(self) -> List[int]:
@@ -136,18 +150,47 @@ class RecommenderSystem:
         self.selection_counts[human_choice_idx] += 1
 
         # Update recommendation counts and accuracy stats
+        # Also determine 'correctness' for UI display
+        agent_correctness = []  # True if recommendation was 'good' (Rec=1 => Heads, Rec=0 => Tails)
         outcome_is_success = outcome_str == "Heads"
+        
         for aid in range(self.config.num_agents):
             action = self.current_recommendations[aid]
+            # Track cumulative reward
+            self.cumulative_agent_rewards[aid] += agent_rewards[aid]
+            
+            is_correct = False
             if action == 1:  # Recommend
                 self.recommendation_counts[aid] += 1
                 self.agent_stats[aid]["rec_count"] += 1
                 if outcome_is_success:
                     self.agent_stats[aid]["tp"] += 1
+                    is_correct = True
             else:  # Not Recommend
                 self.agent_stats[aid]["not_rec_count"] += 1
                 if not outcome_is_success:  # Tails = success for not-recommend
                     self.agent_stats[aid]["tn"] += 1
+                    is_correct = True
+            agent_correctness.append(is_correct)
+
+        # -------------------------------------------------------
+        # Behavioral Logging (Requested Tuple)
+        # -------------------------------------------------------
+        # Tuple: (t, p, rec1, rec2, choice, payoffs, outcome, human_payoff, t_next, done)
+        step_record = {
+            "t": int(current_observation[1]),
+            "p": float(current_observation[0]),
+            "rec_agent_0": int(self.current_recommendations[0]),
+            "rec_agent_1": int(self.current_recommendations[1]),
+            "human_choice": int(human_choice_idx),
+            "agent_0_payoff": float(agent_rewards[0]),
+            "agent_1_payoff": float(agent_rewards[1]),
+            "outcome": outcome_str,
+            "human_payoff": float(human_reward),
+            "t_next": int(next_observation[1]),
+            "done": bool(done)
+        }
+        self.current_episode_history.append(step_record)
 
         # Store transitions and train agents
         for i, agent in enumerate(self.agents):
@@ -179,6 +222,9 @@ class RecommenderSystem:
         finished_episode_history = None
 
         if done:
+            # Save detailed log for this episode
+            self._save_episode_log()
+            self.current_episode_history = []  # Reset for next episode
             # Capture history before reset
             finished_episode_history = self.env.episode_history
 
@@ -188,6 +234,7 @@ class RecommenderSystem:
 
             # Reset environment
             self.current_state = self.env.reset()
+            self.cumulative_agent_rewards = [0.0] * self.config.num_agents
             new_episode_started = True
 
         # Get new recommendations
@@ -196,6 +243,9 @@ class RecommenderSystem:
         return {
             "human_reward": human_reward,
             "agent_rewards": agent_rewards,
+            "cumulative_agent_rewards": self.cumulative_agent_rewards,
+            "agent_correctness": agent_correctness,
+            "human_choice": human_choice_idx,
             "outcome": outcome_str,
             "done": done,
             "next_p": self.current_state[0],
@@ -265,3 +315,24 @@ class RecommenderSystem:
             cumulative_human_reward=self.cumulative_human_reward,
             agent_accuracy=agent_accuracy,
         )
+
+    def _save_episode_log(self):
+        """Saves current episode history to JSON."""
+        if not self.session_id:
+            # If no session ID set, cannot save (or log warning)
+            print("Warning: No session_id set, cannot save behavioral log.")
+            return
+
+        # Create directory: data/sessions/{session_id}
+        base_dir = os.path.join("data", "sessions", self.session_id)
+        os.makedirs(base_dir, exist_ok=True)
+
+        filename = f"episode_{self.episode_count}.json"
+        filepath = os.path.join(base_dir, filename)
+
+        try:
+            with open(filepath, "w") as f:
+                json.dump(self.current_episode_history, f, indent=2)
+            print(f"Saved episode log to {filepath}")
+        except Exception as e:
+            print(f"Error saving episode log: {e}")

@@ -88,6 +88,7 @@ def init_simulation(config: Optional[SimulationConfig] = None) -> InitResponse:
     recommendations = system.reset()  # Returns initial recommendations
 
     session_id = session_store.create(system)
+    system.set_session_id(session_id)  # Enable logging
 
     # Build initial state for frontend
     # The current_state is an observation array [p, t]
@@ -99,6 +100,7 @@ def init_simulation(config: Optional[SimulationConfig] = None) -> InitResponse:
         "step": int(system.env.steps),
         "game_over": False,
         "cumulative_human_reward": 0.0,
+        "cumulative_agent_rewards": [0.0] * config.num_agents,
     }
 
     return InitResponse(session_id=session_id, state=initial_state)
@@ -122,6 +124,7 @@ def create_simulation(config: Optional[SimulationConfig] = None) -> CreateSessio
     system.reset()  # Initialize the simulation
 
     session_id = session_store.create(system)
+    system.set_session_id(session_id)  # Enable logging
 
     return CreateSessionResponse(session_id=session_id)
 
