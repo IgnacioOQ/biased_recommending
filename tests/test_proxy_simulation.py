@@ -2,7 +2,7 @@ import unittest
 import os
 import shutil
 import numpy as np
-from src.proxy_simulation import ProxySimulation
+from backend.proxy_simulation import ProxySimulation
 
 class TestProxySimulation(unittest.TestCase):
     def setUp(self):

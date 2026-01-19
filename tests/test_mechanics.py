@@ -3,11 +3,11 @@ import numpy as np
 import os
 import shutil
 import json
-from src.environment import BanditEnvironment
-from src.agents import RecommenderAgent, ReplayBuffer
-from src.simulation import GameSession
-from src.logging import DataLogger
-from src.analysis import compute_policy_metrics
+from backend.environment import BanditEnvironment
+from backend.agents import RecommenderAgent, ReplayBuffer
+from backend.simulation import GameSession
+from backend.logging import DataLogger
+from backend.analysis import compute_policy_metrics
 
 class TestMechanics(unittest.TestCase):
 

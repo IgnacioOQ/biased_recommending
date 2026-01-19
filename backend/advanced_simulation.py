@@ -1,9 +1,9 @@
 import numpy as np
-from src.simulation import GameSession
-from src.advanced_environment import AdvancedBanditEnvironment
-from src.advanced_agents import AdvancedRecommenderAgent
-from src.logging import DataLogger
-from src.advanced_analysis import compute_advanced_policy_metrics
+from backend.simulation import GameSession
+from backend.advanced_environment import AdvancedBanditEnvironment
+from backend.advanced_agents import AdvancedRecommenderAgent
+from backend.logging import DataLogger
+from backend.advanced_analysis import compute_advanced_policy_metrics
 
 class AdvancedGameSession(GameSession):
     def __init__(self, num_episodes=1000, output_dir="data", steps_per_episode=20, session_id=None):

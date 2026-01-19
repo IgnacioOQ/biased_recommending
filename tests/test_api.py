@@ -6,8 +6,8 @@ import unittest
 
 from fastapi.testclient import TestClient
 
-from src.api.main import app
-from src.api.session import session_store
+from backend.api.main import app
+from backend.api.session import session_store
 
 
 class TestAPI(unittest.TestCase):
@@ -156,7 +156,7 @@ class TestSessionStore(unittest.TestCase):
 
     def test_singleton(self):
         """Test that SessionStore is a singleton."""
-        from src.api.session import SessionStore
+        from backend.api.session import SessionStore
 
         store1 = SessionStore()
         store2 = SessionStore()
@@ -164,7 +164,7 @@ class TestSessionStore(unittest.TestCase):
 
     def test_create_and_get(self):
         """Test creating and retrieving a session."""
-        from src.engine import RecommenderSystem, SimulationConfig
+        from backend.engine import RecommenderSystem, SimulationConfig
 
         system = RecommenderSystem(SimulationConfig())
         session_id = session_store.create(system)
@@ -179,7 +179,7 @@ class TestSessionStore(unittest.TestCase):
 
     def test_delete(self):
         """Test deleting a session."""
-        from src.engine import RecommenderSystem, SimulationConfig
+        from backend.engine import RecommenderSystem, SimulationConfig
 
         system = RecommenderSystem(SimulationConfig())
         session_id = session_store.create(system)
@@ -195,7 +195,7 @@ class TestSessionStore(unittest.TestCase):
 
     def test_list_sessions(self):
         """Test listing session IDs."""
-        from src.engine import RecommenderSystem, SimulationConfig
+        from backend.engine import RecommenderSystem, SimulationConfig
 
         sys1 = RecommenderSystem(SimulationConfig())
         sys2 = RecommenderSystem(SimulationConfig())

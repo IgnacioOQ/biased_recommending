@@ -100,3 +100,25 @@
   - `tests/test_mechanics.py`: 4 passed
   - `tests/test_proxy_simulation.py`: 1 passed
 - **Conclusion:** Project state is consistent and functional.
+
+### Feat: React Frontend Implementation
+**Date:** 2026-01-19
+**Summary:** Added React + TypeScript frontend following REACT_ASSISTANT.md guidelines.
+- **Repository Restructure:**
+  - Renamed `src/` to `backend/` to match monorepo pattern
+  - Updated all Python imports from `src.` to `backend.`
+- **Backend Modifications:**
+  - Added CORS middleware to `backend/api/main.py` for `localhost:5173`
+  - Updated health check to return `{"status": "ok"}`
+  - Added `/api/simulation/init` endpoint returning session_id + initial state
+- **Frontend Files (`frontend/`):**
+  - `App.tsx`: Health check on mount, connection status display
+  - `Controls.tsx`: Full game UI with config panel, game display, choice buttons
+  - `Controls.css`: Modern dark theme with animations
+  - `index.css`: CSS variables and global styles
+- **Tech Stack:** Vite + React 18 + TypeScript
+- **Commands:**
+  - Backend: `python -m uvicorn backend.api.main:app --reload --port 8000`
+  - Frontend: `cd frontend && npm run dev`
+- **Verification:** Health endpoint returns OK, init endpoint returns valid state
+

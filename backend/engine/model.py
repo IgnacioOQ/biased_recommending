@@ -10,10 +10,10 @@ from typing import Any, Dict, List, Optional
 import numpy as np
 import torch
 
-from src.advanced_agents import AdvancedRecommenderAgent
-from src.advanced_environment import AdvancedBanditEnvironment
-from src.engine.config import SimulationConfig
-from src.engine.state import AgentAccuracy, AgentBelief, SimulationState
+from backend.advanced_agents import AdvancedRecommenderAgent
+from backend.advanced_environment import AdvancedBanditEnvironment
+from backend.engine.config import SimulationConfig
+from backend.engine.state import AgentAccuracy, AgentBelief, SimulationState
 
 
 class RecommenderSystem:

@@ -3,11 +3,11 @@ import os
 import json
 import uuid
 from datetime import datetime
-from src.advanced_environment import AdvancedBanditEnvironment
-from src.advanced_agents import AdvancedRecommenderAgent
-from src.human_proxy_agent import HumanProxyAgent
-from src.logging import DataLogger
-from src.advanced_analysis import compute_advanced_policy_metrics
+from backend.advanced_environment import AdvancedBanditEnvironment
+from backend.advanced_agents import AdvancedRecommenderAgent
+from backend.human_proxy_agent import HumanProxyAgent
+from backend.logging import DataLogger
+from backend.advanced_analysis import compute_advanced_policy_metrics
 
 # Helper for JSON serialization
 class NumpyEncoder(json.JSONEncoder):

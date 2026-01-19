@@ -1,8 +1,8 @@
 import unittest
 import numpy as np
-from src.advanced_environment import AdvancedBanditEnvironment
-from src.advanced_agents import AdvancedRecommenderAgent
-from src.advanced_simulation import AdvancedGameSession
+from backend.advanced_environment import AdvancedBanditEnvironment
+from backend.advanced_agents import AdvancedRecommenderAgent
+from backend.advanced_simulation import AdvancedGameSession
 
 class TestAdvancedMechanics(unittest.TestCase):
     def setUp(self):

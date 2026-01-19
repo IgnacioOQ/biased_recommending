@@ -8,8 +8,8 @@ import numpy as np
 from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel
 
-from src.engine import RecommenderSystem, SimulationConfig, SimulationState
-from src.api.session import session_store
+from backend.engine import RecommenderSystem, SimulationConfig, SimulationState
+from backend.api.session import session_store
 
 
 def _convert_numpy_types(obj: Any) -> Any:
@@ -40,6 +40,13 @@ class CreateSessionResponse(BaseModel):
     message: str = "Session created successfully"
 
 
+class InitResponse(BaseModel):
+    """Response model for simulation init (REACT_ASSISTANT pattern)."""
+
+    session_id: str
+    state: dict
+
+
 class StepRequest(BaseModel):
     """Request model for step endpoint."""
 
@@ -58,6 +65,43 @@ class DeleteResponse(BaseModel):
 
     message: str
     session_id: str
+
+
+@router.post("/simulation/init", response_model=InitResponse)
+def init_simulation(config: Optional[SimulationConfig] = None) -> InitResponse:
+    """
+    Initialize a new simulation session and return initial state.
+
+    This follows the REACT_ASSISTANT.md pattern for frontend consumption.
+    Returns session_id plus initial state with recommendations.
+
+    Args:
+        config: Optional SimulationConfig. Uses defaults if not provided.
+
+    Returns:
+        InitResponse with session_id and initial state.
+    """
+    if config is None:
+        config = SimulationConfig()
+
+    system = RecommenderSystem(config)
+    recommendations = system.reset()  # Returns initial recommendations
+
+    session_id = session_store.create(system)
+
+    # Build initial state for frontend
+    # The current_state is an observation array [p, t]
+    initial_state = {
+        "current_p": float(system.current_state[0]),  # p from observation
+        "current_t": int(system.current_state[1]),    # t from observation
+        "recommendations": [int(r) for r in recommendations],
+        "episode": system.episode_count,
+        "step": int(system.env.steps),
+        "game_over": False,
+        "cumulative_human_reward": 0.0,
+    }
+
+    return InitResponse(session_id=session_id, state=initial_state)
 
 
 @router.post("/simulation", response_model=CreateSessionResponse)

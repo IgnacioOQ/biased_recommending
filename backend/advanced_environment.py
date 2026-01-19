@@ -1,5 +1,5 @@
 import numpy as np
-from src.environment import BanditEnvironment
+from backend.environment import BanditEnvironment
 
 class AdvancedBanditEnvironment(BanditEnvironment):
     def __init__(self, max_steps=20):

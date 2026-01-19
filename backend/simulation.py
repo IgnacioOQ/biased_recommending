@@ -1,7 +1,7 @@
-from src.agents import RecommenderAgent
-from src.environment import BanditEnvironment
-from src.logging import DataLogger
-from src.analysis import compute_policy_metrics
+from backend.agents import RecommenderAgent
+from backend.environment import BanditEnvironment
+from backend.logging import DataLogger
+from backend.analysis import compute_policy_metrics
 import numpy as np
 
 class GameSession:

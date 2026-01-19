@@ -6,9 +6,9 @@ import unittest
 
 import numpy as np
 
-from src.engine.config import SimulationConfig
-from src.engine.model import RecommenderSystem
-from src.engine.state import AgentAccuracy, AgentBelief, SimulationState
+from backend.engine.config import SimulationConfig
+from backend.engine.model import RecommenderSystem
+from backend.engine.state import AgentAccuracy, AgentBelief, SimulationState
 
 
 class TestSimulationConfig(unittest.TestCase):
@@ -188,7 +188,7 @@ class TestNoMatplotlibInEngine(unittest.TestCase):
         """Verify model.py doesn't import matplotlib."""
         import inspect
 
-        from src.engine import model
+        from backend.engine import model
 
         source = inspect.getsource(model)
         # Check for actual imports, not documentation mentions
@@ -199,7 +199,7 @@ class TestNoMatplotlibInEngine(unittest.TestCase):
         """Verify config.py doesn't import matplotlib."""
         import inspect
 
-        from src.engine import config
+        from backend.engine import config
 
         source = inspect.getsource(config)
         self.assertNotIn("import matplotlib", source)
@@ -209,7 +209,7 @@ class TestNoMatplotlibInEngine(unittest.TestCase):
         """Verify state.py doesn't import matplotlib."""
         import inspect
 
-        from src.engine import state
+        from backend.engine import state
 
         source = inspect.getsource(state)
         self.assertNotIn("import matplotlib", source)

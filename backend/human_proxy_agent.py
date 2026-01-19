@@ -1,4 +1,4 @@
-from src.agents import RecommenderAgent
+from backend.agents import RecommenderAgent
 
 class HumanProxyAgent(RecommenderAgent):
     def __init__(self, agent_id="human_proxy", input_dim=3, action_dim=2, lr=1e-3, gamma=0.99, epsilon=1.0, epsilon_decay=0.995, epsilon_min=0.01, buffer_capacity=10000, batch_size=64):

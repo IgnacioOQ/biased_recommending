@@ -7,7 +7,7 @@ Provides a singleton SessionStore that holds active simulations in memory.
 import uuid
 from typing import Dict, Optional
 
-from src.engine import RecommenderSystem
+from backend.engine import RecommenderSystem
 
 
 class SessionStore:

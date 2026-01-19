@@ -30,29 +30,62 @@ This template uses a **display-only frontend** pattern where:
 
 ```
 project_name/
-├── backend/
-│   ├── main.py                      # FastAPI endpoints
-│   ├── requirements.txt             # Python dependencies
-│   └── simulation_name/             # Simulation engine package
-│       ├── __init__.py              # Export main classes
-│       ├── agent.py                 # Agent class(es)
-│       ├── environment.py           # Environment/world logic
-│       └── simulation.py            # Main orchestrator
-├── frontend/
+├── backend/                             # Python simulation backend
+│   ├── api/                             # FastAPI web layer
+│   │   ├── __init__.py                  # Export app and routes
+│   │   ├── main.py                      # FastAPI app entry point
+│   │   ├── routes.py                    # API endpoint definitions
+│   │   └── session.py                   # Session store (in-memory dict)
+│   │
+│   ├── engine/                          # Core simulation engine (Pydantic models)
+│   │   ├── __init__.py                  # Export main classes
+│   │   ├── config.py                    # SimulationConfig (hyperparameters)
+│   │   ├── model.py                     # Main simulation class (step, get_state)
+│   │   └── state.py                     # SimulationState, AgentBelief models
+│   │
+│   ├── agents.py                        # Agent class(es) - DQN, RL, etc.
+│   ├── environment.py                   # Environment/world logic
+│   ├── simulation.py                    # Legacy or simple orchestrator
+│   ├── analysis.py                      # Policy metrics, evaluation functions
+│   ├── logging.py                       # DataLogger for behavioral data
+│   └── __init__.py                      # Package init
+│
+├── frontend/                            # React + TypeScript frontend
 │   ├── src/
-│   │   ├── main.tsx                 # React entry point
-│   │   ├── App.tsx                  # Root component (health check)
-│   │   ├── App.css                  # App-level styles
-│   │   ├── Controls.tsx             # Main game UI component
-│   │   ├── Controls.css             # Game UI styles
-│   │   ├── index.css                # Global styles
-│   │   └── vite-env.d.ts            # Vite type declarations
-│   ├── index.html                   # HTML entry point
-│   ├── package.json                 # Node dependencies
-│   ├── vite.config.ts               # Vite configuration
-│   └── tsconfig.json                # TypeScript configuration
-└── README.md
+│   │   ├── main.tsx                     # React entry point
+│   │   ├── App.tsx                      # Root component (health check)
+│   │   ├── App.css                      # App-level styles
+│   │   ├── Controls.tsx                 # Main game UI component
+│   │   ├── Controls.css                 # Game UI styles (dark theme)
+│   │   ├── index.css                    # Global CSS variables & reset
+│   │   └── vite-env.d.ts                # Vite type declarations
+│   ├── index.html                       # HTML entry point
+│   ├── package.json                     # Node dependencies
+│   ├── vite.config.ts                   # Vite configuration
+│   ├── tsconfig.json                    # TypeScript configuration
+│   └── tsconfig.app.json                # App-specific TS config
+│
+├── tests/                               # Python unit tests (pytest)
+│   ├── test_api.py                      # API endpoint tests
+│   ├── test_engine.py                   # Engine/model tests
+│   ├── test_mechanics.py                # Core simulation logic tests
+│   └── conftest.py                      # Pytest fixtures
+│
+├── notebooks/                           # Jupyter notebooks for experiments
+│   ├── experiment_interface.ipynb       # Interactive experiment UI
+│   └── analysis_report.ipynb            # Results visualization
+│
+├── data/                                # Output data (excluded from git)
+│   └── sessions/                        # Exported behavioral logs
+│
+├── requirements.txt                     # Python dependencies (root level)
+├── AGENTS.md                            # Project documentation for AI
+├── AGENTS_LOG.md                        # Change log
+└── README.md                            # Project overview
 ```
+
+> **Important:** All Python imports should use the `backend.` prefix (e.g., `from backend.engine import RecommenderSystem`). This requires running the backend from the project root directory.
+
 
 ---
 
