@@ -18,6 +18,7 @@ from backend.advanced_agents import AdvancedRecommenderAgent
 from backend.advanced_environment import AdvancedBanditEnvironment
 from backend.engine.config import SimulationConfig
 from backend.engine.state import AgentAccuracy, AgentBelief, SimulationState
+from backend.database import db_manager
 
 
 class RecommenderSystem:
@@ -402,6 +403,9 @@ class RecommenderSystem:
             print(f"Updated session log at {filepath}")
         except Exception as e:
             print(f"Error saving session log: {e}")
+        
+        # Persist to MongoDB (if configured)
+        db_manager.save_session(session_data)
 
     def _create_new_session_data(self) -> Dict:
         """Helper to create initial session data structure."""
