@@ -67,39 +67,40 @@ class DeleteResponse(BaseModel):
     session_id: str
 
 
+class InitRequest(BaseModel):
+    """Request model for initialization."""
+    steps_per_episode: int = 20
+    participant_name: str = "Anonymous"
+
+
 @router.post("/simulation/init", response_model=InitResponse)
-def init_simulation(config: Optional[SimulationConfig] = None) -> InitResponse:
+def init_simulation(request: InitRequest) -> InitResponse:
     """
     Initialize a new simulation session and return initial state.
 
-    This follows the REACT_ASSISTANT.md pattern for frontend consumption.
-    Returns session_id plus initial state with recommendations.
-
     Args:
-        config: Optional SimulationConfig. Uses defaults if not provided.
+        request: InitRequest with steps and participant name.
 
     Returns:
         InitResponse with session_id and initial state.
     """
-    if config is None:
-        config = SimulationConfig()
+    # Create internal config with defaults, overriding steps
+    config = SimulationConfig(steps_per_episode=request.steps_per_episode)
 
     system = RecommenderSystem(config)
     recommendations = system.reset()  # Returns initial recommendations
 
     session_id = session_store.create(system)
-    system.set_session_id(session_id)  # Enable logging
+    system.set_session_id(session_id)
+    system.set_participant_name(request.participant_name)
 
     # Build initial state for frontend
-    # The current_state is an observation array [p, t]
     initial_state = {
-        "current_p": float(system.current_state[0]),  # p from observation
-        "current_t": int(system.current_state[1]),    # t from observation
-        "recommendations": [int(r) for r in recommendations],
-        "episode": system.episode_count,
-        "step": int(system.env.steps),
-        "game_over": False,
-        "cumulative_human_reward": 0.0,
+        "current_p": float(system.current_state[0]),
+        "current_t": int(system.current_state[1]),
+        "recommendations": recommendations,
+        "episode": 0,
+        "step": 0,
         "cumulative_agent_rewards": [0.0] * config.num_agents,
     }
 

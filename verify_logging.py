@@ -7,7 +7,12 @@ BASE_URL = "http://localhost:8000/api"
 
 def test_simulation_flow():
     print("1. Initializing simulation...")
-    response = requests.post(f"{BASE_URL}/simulation/init", json={"steps_per_episode": 5})
+    # New payload with participant_name
+    payload = {
+        "steps_per_episode": 5,
+        "participant_name": "TestUser"
+    }
+    response = requests.post(f"{BASE_URL}/simulation/init", json=payload)
     if response.status_code != 200:
         print(f"FAILED: Init response {response.status_code}")
         print(response.text)
@@ -38,23 +43,36 @@ def test_simulation_flow():
             sys.exit(1)
 
     print("3. Verifying log file...")
-    log_path = os.path.join("data", "sessions", session_id, "episode_0.json") # First episode is 0
+    # New log path: data/sessions/{session_id}.json
+    log_path = os.path.join("data", "sessions", f"{session_id}.json")
     
     if not os.path.exists(log_path):
         print(f"FAILED: Log file not found at {log_path}")
         # List dir to see what happened
         print(f"Current dir: {os.getcwd()}")
-        if os.path.exists(os.path.join("data", "sessions", session_id)):
-            print("Dir exists, but file missing.")
         sys.exit(1)
         
     with open(log_path, 'r') as f:
         log_data = json.load(f)
         
-    print(f"   Log file found with {len(log_data)} entries.")
+    # Check top-level structure
+    if log_data["session_id"] != session_id:
+        print("FAILED: Session ID mismatch in log")
+        sys.exit(1)
+    if log_data["participant_name"] != "TestUser":
+        print(f"FAILED: Participant name mismatch. Got {log_data.get('participant_name')}")
+        sys.exit(1)
+    
+    episodes = log_data.get("episodes", {})
+    if "0" not in episodes:
+         print("FAILED: Episode 0 not found in log")
+         sys.exit(1)
+
+    episode_data = episodes["0"]
+    print(f"   Log file found. Episode 0 has {len(episode_data)} entries.")
     
     # Verify tuple structure in first entry
-    entry = log_data[0]
+    entry = episode_data[0]
     required_keys = ["t", "p", "rec_agent_0", "rec_agent_1", "human_choice", 
                      "agent_0_payoff", "agent_1_payoff", "outcome", "human_payoff", 
                      "t_next", "done"]

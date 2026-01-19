@@ -660,6 +660,27 @@ def export_behavioral_data(self, filepath: str):
     return self.history
 ```
 
+### 4.1 Single-File Session Logging (Recommended)
+
+Instead of separate files per episode, maintain a single JSON file per session. This prevents clutter and makes data analysis easier.
+
+**Structure (`data/sessions/{session_id}.json`):**
+```json
+{
+  "session_id": "uuid",
+  "participant_name": "User Input",
+  "start_time": "2024-03-20T10:00:00.123+00:00",
+  "config": { ... },
+  "episodes": {
+    "0": [ ...steps... ],
+    "1": [ ...steps... ]
+  }
+}
+```
+
+**Implementation Tip:**
+Use `datetime.datetime.now().astimezone().isoformat()` for `start_time` to preserve time zone information, which is critical for multi-region studies.
+
 ---
 
 ## Summary

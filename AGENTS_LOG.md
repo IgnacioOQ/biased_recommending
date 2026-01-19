@@ -138,3 +138,7 @@
 - **Conclusion:** Repository structure successfully migrated. Backend remains fully functional with new folder structure.
 
 
+
+## [2026-01-19] Data Cleanup
+- Removed deprecated session directories from `data/sessions/`.
+- Verified that only new single-file JSON logs (`{session_id}.json`) are generated and retained.

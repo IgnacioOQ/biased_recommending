@@ -12,6 +12,7 @@ import torch
 import json
 import os
 import time
+import datetime
 
 from backend.advanced_agents import AdvancedRecommenderAgent
 from backend.advanced_environment import AdvancedBanditEnvironment
@@ -82,11 +83,16 @@ class RecommenderSystem:
 
         # Session and Logging
         self.session_id: Optional[str] = None
+        self.participant_name: str = "Anonymous"
         self.current_episode_history: List[Dict] = []
         
     def set_session_id(self, session_id: str):
         """Set the session ID for data logging."""
         self.session_id = session_id
+
+    def set_participant_name(self, name: str):
+        """Set the participant name for data logging."""
+        self.participant_name = name
 
     def reset(self) -> List[int]:
         """
@@ -317,22 +323,60 @@ class RecommenderSystem:
         )
 
     def _save_episode_log(self):
-        """Saves current episode history to JSON."""
+        """
+        Saves/Updates session log with current episode history.
+        
+        Target file: data/sessions/{session_id}.json
+        Structure:
+        {
+            "session_id": "...",
+            "participant_name": "...",
+            "config": {...},
+            "episodes": {
+                "0": [...],
+                "1": [...]
+            }
+        }
+        """
         if not self.session_id:
-            # If no session ID set, cannot save (or log warning)
             print("Warning: No session_id set, cannot save behavioral log.")
             return
 
-        # Create directory: data/sessions/{session_id}
-        base_dir = os.path.join("data", "sessions", self.session_id)
+        # Ensure directory exists
+        base_dir = os.path.join("data", "sessions")
         os.makedirs(base_dir, exist_ok=True)
-
-        filename = f"episode_{self.episode_count}.json"
-        filepath = os.path.join(base_dir, filename)
-
+        
+        filepath = os.path.join(base_dir, f"{self.session_id}.json")
+        
+        # Load existing data or create new structure
+        if os.path.exists(filepath):
+            try:
+                with open(filepath, "r") as f:
+                    session_data = json.load(f)
+            except Exception as e:
+                print(f"Error reading existing log: {e}. Creating new.")
+                session_data = self._create_new_session_data()
+        else:
+            session_data = self._create_new_session_data()
+            
+        # Update with current episode
+        episode_key = str(self.episode_count)
+        session_data["episodes"][episode_key] = self.current_episode_history
+        
+        # Write back
         try:
             with open(filepath, "w") as f:
-                json.dump(self.current_episode_history, f, indent=2)
-            print(f"Saved episode log to {filepath}")
+                json.dump(session_data, f, indent=2)
+            print(f"Updated session log at {filepath}")
         except Exception as e:
-            print(f"Error saving episode log: {e}")
+            print(f"Error saving session log: {e}")
+
+    def _create_new_session_data(self) -> Dict:
+        """Helper to create initial session data structure."""
+        return {
+            "session_id": self.session_id,
+            "participant_name": self.participant_name,
+            "start_time": datetime.datetime.now().astimezone().isoformat(),
+            "config": self.config.model_dump() if hasattr(self.config, "model_dump") else self.config.dict(),
+            "episodes": {}
+        }

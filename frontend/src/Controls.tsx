@@ -45,6 +45,7 @@ function Controls() {
     const [lastResult, setLastResult] = useState<StepResult | null>(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
+    const [participantName, setParticipantName] = useState('')
 
     // Start simulation
     const startSimulation = async () => {
@@ -59,6 +60,7 @@ function Controls() {
                 body: JSON.stringify({
                     // We rely on backend defaults for RL hyperparameters
                     steps_per_episode: config.steps_per_episode,
+                    participant_name: participantName || 'Anonymous',
                 }),
             })
 
@@ -154,6 +156,19 @@ function Controls() {
             {!state && (
                 <div className="config-panel">
                     <h2>🎲 Start Experiment</h2>
+
+                    <div className="input-group">
+                        <label htmlFor="participant-name">Participant Name (Optional)</label>
+                        <input
+                            id="participant-name"
+                            type="text"
+                            placeholder="Enter your name"
+                            value={participantName}
+                            onChange={(e) => setParticipantName(e.target.value)}
+                            className="text-input"
+                        />
+                    </div>
+
                     <p>Click below to begin the recommendation game.</p>
                     <button
                         className="start-button"

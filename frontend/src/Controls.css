@@ -64,6 +64,37 @@
     box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.1);
 }
 
+.input-group {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.input-group label {
+    margin-left: 0.25rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.text-input {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1rem;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    transition: all 0.2s;
+    width: 100%;
+}
+
+.text-input:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 4px rgba(0, 255, 136, 0.1);
+}
+
 .start-button {
     width: 100%;
     padding: 1rem 2rem;
