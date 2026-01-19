@@ -345,3 +345,25 @@ Want to share your game with the world? Here is how to deploy it for free.
     ```
 4.  Push to GitHub. Render will auto-redeploy, and your game is now live!
 
+---
+
+## STEP 5: Saving Data (Database or Google Sheets)
+
+By default, data is lost when the free server restarts. To save it, choose **one** option and set Environment Variables in Render.
+
+### Option A: MongoDB (Recommended)
+1.  Create a free cluster on [MongoDB Atlas](https://www.mongodb.com/atlas).
+2.  Get your **Connection String** (URI).
+3.  In Render -> Environment Variables, add:
+    *   Key: `MONGODB_URI`
+    *   Value: `mongodb+srv://...`
+
+### Option B: Google Sheets
+1.  Create a Google Cloud Service Account and download the JSON key.
+2.  Share a Google Sheet with the Service Account email.
+3.  In Render -> Environment Variables, add:
+    *   Key: `GOOGLE_SHEETS_CREDENTIALS`
+    *   Value: (Paste the entire JSON content)
+    *   Key: `GOOGLE_SHEET_ID`
+    *   Value: (The long ID from your Sheet URL)
+

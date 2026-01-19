@@ -7,3 +7,7 @@ jupyter
 pydantic
 fastapi
 uvicorn[standard]
+pymongo
+dnspython
+gspread
+oauth2client

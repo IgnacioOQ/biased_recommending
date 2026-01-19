@@ -3,6 +3,7 @@ import json
 import os
 import numpy as np
 from datetime import datetime
+from backend.database import db_manager
 
 class DataLogger:
     def __init__(self, output_dir="data", max_steps=20, session_id=None):
@@ -32,8 +33,30 @@ class DataLogger:
         self._write_session_file()
 
     def _write_session_file(self):
+        # 1. Write to local disk (always)
         with open(self.session_filepath, 'w') as f:
             json.dump(self.session_data, f, indent=4)
+        
+        # 2. Persist to Database/Sheets (if configured)
+        # We transform the structure slightly to match the flat/document expectation if needed,
+        # but db_manager.save_session expects the full dict.
+        # We might want to flatten the structure for Sheets inside db_manager (which we did).
+        
+        # Construct a clean session object for the DB
+        # The logging.py structure is: {"session_meta": {...}, "episodes": []}
+        # The db_manager expects keys like "session_id" at the top level for Sheets
+        # But for Mongo it just dumps the whole thing.
+        # Let's normalize it for the DB call.
+        
+        db_payload = self.session_data.copy()
+        # Ensure top-level ID exists for Mongo upsert
+        if "session_id" not in db_payload:
+            db_payload["session_id"] = self.session_id
+        if "participant_name" not in db_payload:
+             # Try to find it in meta or default
+             db_payload["participant_name"] = "Anonymous"
+             
+        db_manager.save_session(db_payload)
 
     def log_step(self, episode, step, p, recommendations, human_choice, human_reward, agent_rewards, outcome):
         entry = {
