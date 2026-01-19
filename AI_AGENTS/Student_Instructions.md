@@ -352,18 +352,41 @@ Want to share your game with the world? Here is how to deploy it for free.
 By default, data is lost when the free server restarts. To save it, choose **one** option and set Environment Variables in Render.
 
 ### Option A: MongoDB (Recommended)
-1.  Create a free cluster on [MongoDB Atlas](https://www.mongodb.com/atlas).
-2.  Get your **Connection String** (URI).
-3.  In Render -> Environment Variables, add:
+1.  **Create Account:** Go to [MongoDB Atlas](https://www.mongodb.com/atlas) and sign up (Free Shared Tier).
+2.  **Create Cluster:** Click "Build a Database" -> "Shared" -> "Create".
+3.  **Create User:** In "Database Access", create a new database user (e.g., `admin`) and save the password.
+4.  **Network Access:** In "Network Access", add IP Address `0.0.0.0/0` (Allow Access from Anywhere) so Render can connect.
+5.  **Get Connection String:**
+    *   Click "Connect" -> "Drivers" -> "Python".
+    *   Copy the string: `mongodb+srv://admin:<password>@cluster0.example.mongodb.net/?retryWrites=true&w=majority`
+    *   Replace `<password>` with your real password.
+6.  **Set in Render:** In Render Dashboard -> Environment Variables:
     *   Key: `MONGODB_URI`
-    *   Value: `mongodb+srv://...`
+    *   Value: (Your connection string)
 
 ### Option B: Google Sheets
-1.  Create a Google Cloud Service Account and download the JSON key.
-2.  Share a Google Sheet with the Service Account email.
-3.  In Render -> Environment Variables, add:
-    *   Key: `GOOGLE_SHEETS_CREDENTIALS`
-    *   Value: (Paste the entire JSON content)
-    *   Key: `GOOGLE_SHEET_ID`
-    *   Value: (The long ID from your Sheet URL)
+This is great for seeing results in a spreadsheet.
+
+1.  **Google Cloud Console:**
+    *   Go to [console.cloud.google.com](https://console.cloud.google.com/).
+    *   Create a **New Project**.
+2.  **Enable APIs:**
+    *   Go to "APIs & Services" -> "Library".
+    *   Search for **"Google Sheets API"** -> Click Enable.
+    *   Search for **"Google Drive API"** -> Click Enable.
+3.  **Create Service Account:**
+    *   Go to "APIs & Services" -> "Credentials".
+    *   Click "Create Credentials" -> "Service Account".
+    *   Name it `simulation-logger`. Click Done.
+4.  **Download Keys:**
+    *   Click on your new Service Account (email address).
+    *   Go to "Keys" tab -> "Add Key" -> "Create new key" -> **JSON**.
+    *   A `.json` file will download to your computer. **Keep this secret!**
+5.  **Share the Sheet:**
+    *   Create a new Google Sheet.
+    *   Click "Share" and paste the **Service Account Email** (found in the JSON file, e.g., `simulation-logger@project.iam.gserviceaccount.com`).
+    *   Give it "Editor" access.
+6.  **Set in Render:**
+    *   Key: `GOOGLE_SHEET_ID` -> Value: (The long string in your Sheet URL)
+    *   Key: `GOOGLE_SHEETS_CREDENTIALS` -> Value: (Open the JSON file with a text editor, copy the **entire content**, and paste it here).
 
