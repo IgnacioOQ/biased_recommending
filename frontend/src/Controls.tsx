@@ -158,6 +158,30 @@ function Controls() {
                 <div className="config-panel">
                     <h2>🎲 Start Experiment</h2>
 
+                    <div className="game-explanation">
+                        <p><strong>Welcome to the Recommender System Game!</strong></p>
+
+                        <div className="explanation-section">
+                            <h3>🎮 How the Game Works</h3>
+                            <ol>
+                                <li>The <strong>AI Agents observe a "Coin Bias"</strong> (probability of Heads) for the current step.</li>
+                                <li>The Agents give you a recommendation: <strong>RECOMMEND</strong> (bet on Heads) or <strong>NOT RECOMMEND</strong> (bet on Tails).</li>
+                                <li><strong>You choose</strong> which agent to trust.</li>
+                                <li>A virtual <strong>coin is flipped</strong> based on the hidden bias.</li>
+                                <li>If you win (Heads & Recommended, or Tails & Not Recommended), you get <strong>+1 point</strong>.</li>
+                            </ol>
+                        </div>
+
+                        <div className="explanation-section">
+                            <h3>📝 Details</h3>
+                            <ul>
+                                <li><strong>Length:</strong> Each game (episode) lasts for <strong>20 steps</strong>.</li>
+                                <li><strong>Replay:</strong> The agents learn over time! Play multiple episodes to see how they adapt.</li>
+                                <li><strong>Goal:</strong> Figure out which agent is smarter and maximize your total score.</li>
+                            </ul>
+                        </div>
+                    </div>
+
                     <div className="input-group">
                         <label htmlFor="participant-name">Participant Name (Optional)</label>
                         <input
