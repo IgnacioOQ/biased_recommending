@@ -69,4 +69,11 @@ class SimulationState(BaseModel):
         default_factory=dict, description="Accuracy metrics per agent"
     )
 
+    # New metrics for UI
+    episode_reward: int = Field(default=0, description="Reward in current episode")
+    average_reward: float = Field(default=0.0, description="Average reward per episode")
+    agent_successes: List[int] = Field(
+        default_factory=list, description="Count of correct predictions per agent in current episode"
+    )
+
     model_config = ConfigDict(arbitrary_types_allowed=True)

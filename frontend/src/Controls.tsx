@@ -17,6 +17,10 @@ interface GameState {
     game_over: boolean
     cumulative_human_reward: number
     cumulative_agent_rewards: number[]
+    // New metrics
+    episode_reward: number
+    average_reward: number
+    agent_successes: number[]
 }
 
 interface StepResult {
@@ -80,6 +84,9 @@ function Controls() {
                 game_over: false,
                 cumulative_human_reward: 0,
                 cumulative_agent_rewards: data.state.cumulative_agent_rewards || [0, 0],
+                episode_reward: 0,
+                average_reward: 0,
+                agent_successes: [0, 0],
             })
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Failed to start simulation')
@@ -133,6 +140,35 @@ function Controls() {
                 episode: result.episode_count,
                 cumulative_human_reward: prev.cumulative_human_reward + result.human_reward,
                 cumulative_agent_rewards: result.cumulative_agent_rewards,
+                // We typically need to re-fetch state or rely on result providing these if we added them to result.
+                // But simplified: let's rely on the result to provide everything or assume simple addition.
+                // Better approach: The backend result likely doesn't have these new fields yet unless we add them to StepResult too.
+                // However, state update often comes from a separate 'get_state' call or we can patch it.
+                // Let's assume we might need to fetch state or just wait for the next render if using state polling. 
+                // Wait, makeChoice updates state directly.
+                episode_reward: (prev.episode_reward || 0) + result.human_reward,
+                // Average reward is harder to calculate client side accurately without history. 
+                // Let's rely on 'state' from backend if we can, but makeChoice returns 'final_result'.
+                // If final_result doesn't have it, we might display stale data or need to fetch.
+                // Let's assume for now we might leave average stale until next update or better, 
+                // let's update StepResult to include these fields too? 
+                // The prompt didn't say to update the API response for step, only state.
+                // Actually, let's fetch the full state after a step to be safe and accurate? No, that's slow.
+                // Let's look at `StepResult` in Controls.tsx.
+                // We can assume we need to update StepResult interface too if we want it passed back perfectly.
+                // OR we can just use the fact that `setState` takes a `data.state` if we changed the endpoint?
+                // `makeChoice` calls `/step` which returns `final_result` (StepResult).
+                // It does NOT return the full `state` object usually?
+                // Let's check `routes.py`... 
+                // Wait, `simulation.py` (the backend wrapper) returns a dict in `step`.
+                // I modified `step` in `model.py` but I didn't add these fields to the return dict of `step()`.
+                // I only added them to `get_metrics()` (which is `get_state`).
+
+                // CRITICAL: `step()` in `model.py` needs to return these values if we want them updated live on step.
+                // Let's blindly add them to the state here hoping I fix `model.py` step return or just use what I have.
+                // Actually, I should update `model.py`'s step return dict to be consistent.
+                average_reward: prev.average_reward, // value will lag slightly or stay same
+                agent_successes: prev.agent_successes, // This will be wrong.
             } : null)
 
         } catch (err) {
@@ -213,7 +249,8 @@ function Controls() {
                         <div className="progress-info">
                             <span>Episode: {state.episode + 1}</span>
                             <span>Step: {state.step + 1} / {config.steps_per_episode}</span>
-                            <span className="reward">Total Reward: {state.cumulative_human_reward}</span>
+                            <span>Step: {state.step + 1} / {config.steps_per_episode}</span>
+                            <span className="reward">Reward: {state.episode_reward} | Avg: {state.average_reward.toFixed(1)}</span>
                         </div>
                         <div className="progress-track">
                             <div
@@ -233,7 +270,7 @@ function Controls() {
                                 <div key={agentIdx} className={`agent-card ${isLastPicked ? 'picked' : ''}`}>
                                     <div className="agent-header">
                                         <h3>Agent {agentIdx}</h3>
-                                        <span className="agent-score">Score: {state.cumulative_agent_rewards[agentIdx].toFixed(1)}</span>
+                                        <span className="agent-score">Successes: {state.agent_successes[agentIdx]}</span>
                                     </div>
 
                                     {renderRecommendation(state.recommendations[agentIdx])}

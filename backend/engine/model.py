@@ -81,6 +81,11 @@ class RecommenderSystem:
             for i in range(config.num_agents)
         }
 
+        # New Metric Tracking
+        self.session_reward: int = 0
+        self.episode_reward: int = 0
+        self.agent_successes: List[int] = [0] * config.num_agents
+
         # Session and Logging
         self.session_id: Optional[str] = None
         self.participant_name: str = "Anonymous"
@@ -104,6 +109,11 @@ class RecommenderSystem:
         self.current_state = self.env.reset()
         self.is_active = True
         self.cumulative_agent_rewards = [0.0] * self.config.num_agents
+        
+        # Reset episode-specific metrics
+        self.episode_reward = 0
+        self.agent_successes = [0] * self.config.num_agents
+        
         return self._get_recommendations()
 
     def _get_recommendations(self) -> List[int]:
@@ -154,6 +164,10 @@ class RecommenderSystem:
         self.step_count += 1
         self.cumulative_human_reward += human_reward
         self.selection_counts[human_choice_idx] += 1
+        
+        # Update metric trackers
+        self.episode_reward += human_reward
+        self.session_reward += human_reward
 
         # Update recommendation counts and accuracy stats
         # Also determine 'correctness' for UI display
@@ -178,6 +192,10 @@ class RecommenderSystem:
                     self.agent_stats[aid]["tn"] += 1
                     is_correct = True
             agent_correctness.append(is_correct)
+
+            # Track successes for this episode
+            if is_correct:
+                self.agent_successes[aid] += 1
 
         # -------------------------------------------------------
         # Behavioral Logging (Requested Tuple)
@@ -241,6 +259,10 @@ class RecommenderSystem:
             # Reset environment
             self.current_state = self.env.reset()
             self.cumulative_agent_rewards = [0.0] * self.config.num_agents
+            
+            # Reset episode metrics
+            self.episode_reward = 0
+            self.agent_successes = [0] * self.config.num_agents
             new_episode_started = True
 
         # Get new recommendations
@@ -259,6 +281,11 @@ class RecommenderSystem:
             "new_episode": new_episode_started,
             "episode_count": self.episode_count,
             "finished_episode_history": finished_episode_history,
+            
+            # New Metrics for Step Result
+            "episode_reward": self.episode_reward,
+            "average_reward": self.session_reward / max(1, self.episode_count) if self.episode_count > 0 else 0.0,
+            "agent_successes": self.agent_successes,
         }
 
     def get_metrics(self) -> SimulationState:
@@ -320,6 +347,11 @@ class RecommenderSystem:
             selection_counts=dict(self.selection_counts),
             cumulative_human_reward=self.cumulative_human_reward,
             agent_accuracy=agent_accuracy,
+            
+            # New Metrics
+            episode_reward=self.episode_reward,
+            average_reward=self.session_reward / max(1, self.episode_count) if self.episode_count > 0 else 0.0,
+            agent_successes=self.agent_successes,
         )
 
     def _save_episode_log(self):
