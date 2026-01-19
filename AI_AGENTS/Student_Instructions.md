@@ -308,7 +308,7 @@ Want to share your game with the world? Here is how to deploy it for free.
 3.  **New Web Service:**
     - Connect your GitHub repo.
     - Name: `my-simulation-backend`
-    - Root Directory: `.` (leave empty)
+    - Root Directory: `.` (Leave empty. This tells Render to run commands from the main folder.)
     - Runtime: **Python 3**
     - Build Command: `pip install -r requirements.txt`
     - Start Command: `uvicorn backend.api.main:app --host 0.0.0.0 --port $PORT`
