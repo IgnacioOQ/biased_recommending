@@ -313,7 +313,9 @@ Want to share your game with the world? Here is how to deploy it for free.
     - Build Command: `pip install -r requirements.txt`
     - Start Command: `uvicorn backend.api.main:app --host 0.0.0.0 --port $PORT`
     - **Instance Type:** Scroll down and select **Free** (Important!)
-4.  **Deploy!** Copy your new URL (e.g., `https://my-backend.onrender.com`).
+4.  **Wait for Deployment:** It will say "Deploying" for a few minutes. Wait until it turns **Green** ("Live").
+5.  **Copy YOUR URL:** fast-copy the URL from the top-left (e.g., `https://my-backend-x82z.onrender.com`).
+    *   *Warning: Do not use the example URL from this guide! Use the one Render gives you.*
 
 ### Frontend on Vercel (React)
 
@@ -327,7 +329,7 @@ Want to share your game with the world? Here is how to deploy it for free.
     - Framework Preset: **Vite**
     - **Environment Variables:**
         - Name: `VITE_API_URL`
-        - Value: `https://my-backend.onrender.com` (Paste your Render URL here)
+        - Value: `https://my-backend-x82z.onrender.com` (Paste **YOUR** Render URL here. No trailing slash.)
 4.  **Deploy!** Vercel will give you a live URL (e.g., `https://my-game.vercel.app`).
 
 ### Final Step: Connect Them
