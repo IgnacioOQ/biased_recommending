@@ -292,3 +292,54 @@ GET /simulation/export/{session_id}
 | `/simulation/tick/{id}`        | POST   | Move obstacles only (continuous mode) |
 | `/simulation/state/{id}`       | GET    | Get current game state                |
 | `/simulation/export/{id}`      | GET    | Export behavioral data as JSON        |
+
+---
+
+## STEP 3: Hosting Online (Cloud Deployment)
+
+Want to share your game with the world? Here is how to deploy it for free.
+
+### Backend on Render.com (Python)
+
+*Render's Free Tier spins down after 15 minutes of inactivity. The first request might take 50 seconds to load.*
+
+1.  **Push your code to GitHub.**
+2.  **Create a free account on [Render.com](https://render.com).**
+3.  **New Web Service:**
+    - Connect your GitHub repo.
+    - Name: `my-simulation-backend`
+    - Root Directory: `.` (leave empty)
+    - Runtime: **Python 3**
+    - Build Command: `pip install -r requirements.txt`
+    - Start Command: `uvicorn backend.api.main:app --host 0.0.0.0 --port $PORT`
+    - **Instance Type:** Scroll down and select **Free** (Important!)
+4.  **Deploy!** Copy your new URL (e.g., `https://my-backend.onrender.com`).
+
+### Frontend on Vercel (React)
+
+*Vercel's Hobby Tier is free for personal projects.*
+
+1.  **Create a free account on [Vercel.com](https://vercel.com).**
+2.  **Add New Project:**
+    - Import your GitHub repo.
+3.  **Configure:**
+    - Root Directory: `frontend`
+    - Framework Preset: **Vite**
+    - **Environment Variables:**
+        - Name: `VITE_API_URL`
+        - Value: `https://my-backend.onrender.com` (Paste your Render URL here)
+4.  **Deploy!** Vercel will give you a live URL (e.g., `https://my-game.vercel.app`).
+
+### Final Step: Connect Them
+
+1.  Go back to your local code.
+2.  Open `backend/api/main.py`.
+3.  Add your Vercel URL to the `allow_origins` list:
+    ```python
+    allow_origins=[
+        "http://localhost:5173",
+        "https://my-game.vercel.app"
+    ]
+    ```
+4.  Push to GitHub. Render will auto-redeploy, and your game is now live!
+

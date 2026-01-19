@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react'
 import Controls from './Controls'
 import './App.css'
+import { API_BASE_URL } from './config'
 
 function App() {
   const [health, setHealth] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    fetch('http://localhost:8000/health')
+    fetch(`${API_BASE_URL}/health`)
       .then(res => res.json())
       .then(data => setHealth(data.status))
       .catch(err => setError(err.message))

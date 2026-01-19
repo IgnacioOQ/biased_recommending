@@ -694,3 +694,63 @@ This architecture cleanly separates concerns:
 | **Frontend** | React + TypeScript | Display rendering, user input capture |
 
 AI assistants should use this pattern when helping users create web-based simulations for ML training, game prototypes, or educational tools.
+
+---
+
+## Step 4: Cloud Deployment (Render & Vercel)
+
+For production deployment, use **Render** for the Python backend and **Vercel** for the React frontend.
+
+### 4.1 Prerequisites
+
+- GitHub Account (project must be in a repository)
+- Render Account (for backend)
+- Vercel Account (for frontend)
+
+### 4.2 Preparation: Environment Variables
+
+**Code Refactoring Required Before Deployment:**
+1.  **Backend (`main.py`):** Update CORS to allow production origins.
+    ```python
+    origins = [
+        "http://localhost:5173",
+        "https://your-project.vercel.app" # Add Vercel URL after deployment
+    ]
+    # Optionally use os.getenv("FRONTEND_URL")
+    ```
+2.  **Frontend:** Replace hardcoded `http://localhost:8000` with `import.meta.env.VITE_API_URL`.
+    - Create `.env.production` file:
+      ```
+      VITE_API_URL=https://your-project-backend.onrender.com
+      ```
+
+### 4.3 Backend Deployment (Render.com)
+
+1.  **Create Service:**
+    - Dashboard -> New + -> **Web Service**
+    - Connect GitHub repository
+2.  **Configure Settings:**
+    - **Name:** `project-backend`
+    - **Runtime:** Python 3
+    - **Build Command:** `pip install -r requirements.txt`
+    - **Start Command:** `uvicorn backend.api.main:app --host 0.0.0.0 --port $PORT`
+    - **Environment Variables:**
+        - `PYTHON_VERSION`: `3.10.0` (or matching your local version)
+3.  **Deploy:** Click "Create Web Service".
+4.  **Copy URL:** (e.g., `https://project-backend.onrender.com`).
+
+### 4.4 Frontend Deployment (Vercel)
+
+1.  **Create Project:**
+    - Dashboard -> **Add New...** -> **Project**
+    - Import GitHub repository
+2.  **Configure Project:**
+    - **Root Directory:** Edit -> Select `frontend` folder
+    - **Framework Preset:** Vite
+    - **Environment Variables:**
+        - `VITE_API_URL`: `https://project-backend.onrender.com` (No trailing slash)
+3.  **Deploy:** Click "Deploy".
+4.  **Update Backend CORS:**
+    - Update `backend/api/main.py` with the new Vercel domain.
+    - Push changes to GitHub to trigger Render redeploy.
+

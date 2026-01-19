@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './Controls.css'
+import { API_BASE_URL } from './config'
 
 // TypeScript interfaces
 interface SimulationConfig {
@@ -54,7 +55,7 @@ function Controls() {
         setLastResult(null)
 
         try {
-            const response = await fetch('http://localhost:8000/api/simulation/init', {
+            const response = await fetch(`${API_BASE_URL}/api/simulation/init`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -94,7 +95,7 @@ function Controls() {
         setError(null)
 
         try {
-            const response = await fetch(`http://localhost:8000/api/simulation/${state.session_id}/step`, {
+            const response = await fetch(`${API_BASE_URL}/api/simulation/${state.session_id}/step`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
