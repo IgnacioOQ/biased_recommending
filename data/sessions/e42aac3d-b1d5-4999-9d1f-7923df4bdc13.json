@@ -1,0 +1,87 @@
+{
+  "session_id": "e42aac3d-b1d5-4999-9d1f-7923df4bdc13",
+  "participant_name": "Anonymous",
+  "start_time": "2026-01-19T14:06:19.162597+01:00",
+  "config": {
+    "alpha": 0.001,
+    "beta": 0.99,
+    "epsilon": 1.0,
+    "epsilon_decay": 0.995,
+    "epsilon_min": 0.01,
+    "num_agents": 2,
+    "input_dim": 2,
+    "action_dim": 2,
+    "buffer_capacity": 10000,
+    "batch_size": 64,
+    "steps_per_episode": 5
+  },
+  "episodes": {
+    "0": [
+      {
+        "t": 0,
+        "p": 0.88326495885849,
+        "rec_agent_0": 0,
+        "rec_agent_1": 1,
+        "human_choice": 0,
+        "agent_0_payoff": 1.0,
+        "agent_1_payoff": -1.0,
+        "outcome": "Heads",
+        "human_payoff": 0.0,
+        "t_next": 1,
+        "done": false
+      },
+      {
+        "t": 1,
+        "p": 0.009623362682759762,
+        "rec_agent_0": 0,
+        "rec_agent_1": 0,
+        "human_choice": 0,
+        "agent_0_payoff": 1.0,
+        "agent_1_payoff": -1.0,
+        "outcome": "Tails",
+        "human_payoff": 1.0,
+        "t_next": 2,
+        "done": false
+      },
+      {
+        "t": 2,
+        "p": 0.12831366062164307,
+        "rec_agent_0": 0,
+        "rec_agent_1": 0,
+        "human_choice": 0,
+        "agent_0_payoff": 1.0,
+        "agent_1_payoff": -1.0,
+        "outcome": "Tails",
+        "human_payoff": 1.0,
+        "t_next": 3,
+        "done": false
+      },
+      {
+        "t": 3,
+        "p": 0.5993183851242065,
+        "rec_agent_0": 1,
+        "rec_agent_1": 0,
+        "human_choice": 0,
+        "agent_0_payoff": 1.0,
+        "agent_1_payoff": -1.0,
+        "outcome": "Heads",
+        "human_payoff": 1.0,
+        "t_next": 4,
+        "done": false
+      },
+      {
+        "t": 4,
+        "p": 0.1750144064426422,
+        "rec_agent_0": 0,
+        "rec_agent_1": 1,
+        "human_choice": 0,
+        "agent_0_payoff": 1.0,
+        "agent_1_payoff": -1.0,
+        "outcome": "Tails",
+        "human_payoff": 1.0,
+        "t_next": 5,
+        "done": true
+      }
+    ]
+  }
+}
