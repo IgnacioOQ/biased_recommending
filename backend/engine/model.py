@@ -405,7 +405,10 @@ class RecommenderSystem:
             print(f"Error saving session log: {e}")
         
         # Persist to MongoDB (if configured)
-        db_manager.save_session(session_data)
+        try:
+            db_manager.save_session(session_data)
+        except Exception as e:
+            print(f"Warning: Failed to save to remote database: {e}")
 
     def _create_new_session_data(self) -> Dict:
         """Helper to create initial session data structure."""
