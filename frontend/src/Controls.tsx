@@ -35,11 +35,6 @@ interface StepResult {
     episode: number
     human_choice: number
     agent_correctness: boolean[]
-    current_p: number
-    step: number
-    episode: number
-    human_choice: number
-    agent_correctness: boolean[]
     cumulative_agent_rewards: number[]
     // Added metrics directly to result interface
     episode_reward?: number
