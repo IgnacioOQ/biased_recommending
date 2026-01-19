@@ -1,0 +1,1819 @@
+{
+    "session_meta": {
+        "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+        "total_number_of_steps_in_episode": 20,
+        "start_time": "2026-01-19T21:06:05.268784"
+    },
+    "episodes": [
+        [
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.272331",
+                "episode": 0,
+                "step": 1,
+                "p": 0.4512213468551636,
+                "recommendations": [
+                    1,
+                    1
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.272874",
+                "episode": 0,
+                "step": 2,
+                "p": 0.26374462246894836,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.272934",
+                "episode": 0,
+                "step": 3,
+                "p": 0.3667224943637848,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 0,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.272964",
+                "episode": 0,
+                "step": 4,
+                "p": 0.030268825590610504,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.272990",
+                "episode": 0,
+                "step": 5,
+                "p": 0.8102261424064636,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.273013",
+                "episode": 0,
+                "step": 6,
+                "p": 0.7437231540679932,
+                "recommendations": [
+                    1,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.273036",
+                "episode": 0,
+                "step": 7,
+                "p": 0.156962051987648,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.273059",
+                "episode": 0,
+                "step": 8,
+                "p": 0.42966172099113464,
+                "recommendations": [
+                    0,
+                    1
+                ],
+                "human_choice": 0,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.273093",
+                "episode": 0,
+                "step": 9,
+                "p": 0.47809815406799316,
+                "recommendations": [
+                    0,
+                    1
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.273115",
+                "episode": 0,
+                "step": 10,
+                "p": 0.7249954342842102,
+                "recommendations": [
+                    0,
+                    1
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.273141",
+                "episode": 0,
+                "step": 11,
+                "p": 0.4402742385864258,
+                "recommendations": [
+                    1,
+                    0
+                ],
+                "human_choice": 0,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.273164",
+                "episode": 0,
+                "step": 12,
+                "p": 0.2277275025844574,
+                "recommendations": [
+                    1,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.273185",
+                "episode": 0,
+                "step": 13,
+                "p": 0.9393786191940308,
+                "recommendations": [
+                    1,
+                    1
+                ],
+                "human_choice": 0,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.273207",
+                "episode": 0,
+                "step": 14,
+                "p": 0.2336954027414322,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 0,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.273228",
+                "episode": 0,
+                "step": 15,
+                "p": 0.6956140398979187,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.273251",
+                "episode": 0,
+                "step": 16,
+                "p": 0.7729320526123047,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 0,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.273274",
+                "episode": 0,
+                "step": 17,
+                "p": 0.8463236689567566,
+                "recommendations": [
+                    0,
+                    1
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.273295",
+                "episode": 0,
+                "step": 18,
+                "p": 0.7680690288543701,
+                "recommendations": [
+                    0,
+                    1
+                ],
+                "human_choice": 0,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.273319",
+                "episode": 0,
+                "step": 19,
+                "p": 0.6142886877059937,
+                "recommendations": [
+                    0,
+                    1
+                ],
+                "human_choice": 0,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.273335",
+                "episode": 0,
+                "step": 20,
+                "p": 0.3843459486961365,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 0,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Tails"
+            }
+        ],
+        [
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.298194",
+                "episode": 1,
+                "step": 1,
+                "p": 0.07179145514965057,
+                "recommendations": [
+                    0,
+                    1
+                ],
+                "human_choice": 0,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.298238",
+                "episode": 1,
+                "step": 2,
+                "p": 0.09924574196338654,
+                "recommendations": [
+                    1,
+                    0
+                ],
+                "human_choice": 0,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.298314",
+                "episode": 1,
+                "step": 3,
+                "p": 0.8686608076095581,
+                "recommendations": [
+                    1,
+                    1
+                ],
+                "human_choice": 0,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.298346",
+                "episode": 1,
+                "step": 4,
+                "p": 0.9234658479690552,
+                "recommendations": [
+                    1,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.298377",
+                "episode": 1,
+                "step": 5,
+                "p": 0.47480279207229614,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 0,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.298407",
+                "episode": 1,
+                "step": 6,
+                "p": 0.5338515043258667,
+                "recommendations": [
+                    0,
+                    1
+                ],
+                "human_choice": 0,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.298436",
+                "episode": 1,
+                "step": 7,
+                "p": 0.6301307082176208,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 0,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.298465",
+                "episode": 1,
+                "step": 8,
+                "p": 0.4263940453529358,
+                "recommendations": [
+                    1,
+                    1
+                ],
+                "human_choice": 1,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.298494",
+                "episode": 1,
+                "step": 9,
+                "p": 0.44554656744003296,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 0,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.298524",
+                "episode": 1,
+                "step": 10,
+                "p": 0.8071702122688293,
+                "recommendations": [
+                    0,
+                    1
+                ],
+                "human_choice": 0,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.298553",
+                "episode": 1,
+                "step": 11,
+                "p": 0.27170974016189575,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 0,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.298582",
+                "episode": 1,
+                "step": 12,
+                "p": 0.84932541847229,
+                "recommendations": [
+                    1,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.298611",
+                "episode": 1,
+                "step": 13,
+                "p": 0.6045182347297668,
+                "recommendations": [
+                    1,
+                    1
+                ],
+                "human_choice": 0,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.298641",
+                "episode": 1,
+                "step": 14,
+                "p": 0.3751523494720459,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.298678",
+                "episode": 1,
+                "step": 15,
+                "p": 0.9856220483779907,
+                "recommendations": [
+                    1,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.298710",
+                "episode": 1,
+                "step": 16,
+                "p": 0.11892107129096985,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.298739",
+                "episode": 1,
+                "step": 17,
+                "p": 0.24739813804626465,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.298768",
+                "episode": 1,
+                "step": 18,
+                "p": 0.1315086930990219,
+                "recommendations": [
+                    1,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.298802",
+                "episode": 1,
+                "step": 19,
+                "p": 0.2068442702293396,
+                "recommendations": [
+                    1,
+                    1
+                ],
+                "human_choice": 0,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.298823",
+                "episode": 1,
+                "step": 20,
+                "p": 0.7256804704666138,
+                "recommendations": [
+                    0,
+                    1
+                ],
+                "human_choice": 0,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Tails"
+            }
+        ],
+        [
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.304810",
+                "episode": 2,
+                "step": 1,
+                "p": 0.0297685693949461,
+                "recommendations": [
+                    0,
+                    1
+                ],
+                "human_choice": 0,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.304843",
+                "episode": 2,
+                "step": 2,
+                "p": 0.07555585354566574,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.304868",
+                "episode": 2,
+                "step": 3,
+                "p": 0.14780239760875702,
+                "recommendations": [
+                    1,
+                    0
+                ],
+                "human_choice": 0,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.304890",
+                "episode": 2,
+                "step": 4,
+                "p": 0.1591816246509552,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 0,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.304912",
+                "episode": 2,
+                "step": 5,
+                "p": 0.1766965240240097,
+                "recommendations": [
+                    1,
+                    0
+                ],
+                "human_choice": 0,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.304934",
+                "episode": 2,
+                "step": 6,
+                "p": 0.48244842886924744,
+                "recommendations": [
+                    0,
+                    1
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.304955",
+                "episode": 2,
+                "step": 7,
+                "p": 0.7410781383514404,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 0,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.304976",
+                "episode": 2,
+                "step": 8,
+                "p": 0.3453463613986969,
+                "recommendations": [
+                    0,
+                    1
+                ],
+                "human_choice": 0,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.304997",
+                "episode": 2,
+                "step": 9,
+                "p": 0.779698371887207,
+                "recommendations": [
+                    1,
+                    1
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.305018",
+                "episode": 2,
+                "step": 10,
+                "p": 0.13432633876800537,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.305040",
+                "episode": 2,
+                "step": 11,
+                "p": 0.11121318489313126,
+                "recommendations": [
+                    1,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.305120",
+                "episode": 2,
+                "step": 12,
+                "p": 0.1993507593870163,
+                "recommendations": [
+                    1,
+                    0
+                ],
+                "human_choice": 0,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.305193",
+                "episode": 2,
+                "step": 13,
+                "p": 0.8437691926956177,
+                "recommendations": [
+                    1,
+                    1
+                ],
+                "human_choice": 0,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.305261",
+                "episode": 2,
+                "step": 14,
+                "p": 0.44047021865844727,
+                "recommendations": [
+                    1,
+                    1
+                ],
+                "human_choice": 1,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.305300",
+                "episode": 2,
+                "step": 15,
+                "p": 0.5033181309700012,
+                "recommendations": [
+                    0,
+                    1
+                ],
+                "human_choice": 0,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.305337",
+                "episode": 2,
+                "step": 16,
+                "p": 0.45028963685035706,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.305379",
+                "episode": 2,
+                "step": 17,
+                "p": 0.6700243949890137,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 0,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.305414",
+                "episode": 2,
+                "step": 18,
+                "p": 0.8296226859092712,
+                "recommendations": [
+                    0,
+                    1
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.305449",
+                "episode": 2,
+                "step": 19,
+                "p": 0.3185194730758667,
+                "recommendations": [
+                    1,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.305475",
+                "episode": 2,
+                "step": 20,
+                "p": 0.4226556718349457,
+                "recommendations": [
+                    1,
+                    1
+                ],
+                "human_choice": 0,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Heads"
+            }
+        ],
+        [
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.312483",
+                "episode": 3,
+                "step": 1,
+                "p": 0.36737626791000366,
+                "recommendations": [
+                    1,
+                    1
+                ],
+                "human_choice": 1,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.312516",
+                "episode": 3,
+                "step": 2,
+                "p": 0.23406687378883362,
+                "recommendations": [
+                    1,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.312541",
+                "episode": 3,
+                "step": 3,
+                "p": 0.24059399962425232,
+                "recommendations": [
+                    1,
+                    1
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.426060",
+                "episode": 3,
+                "step": 4,
+                "p": 0.2916100025177002,
+                "recommendations": [
+                    1,
+                    1
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.430709",
+                "episode": 3,
+                "step": 5,
+                "p": 0.8492816090583801,
+                "recommendations": [
+                    0,
+                    1
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.434046",
+                "episode": 3,
+                "step": 6,
+                "p": 0.1450805515050888,
+                "recommendations": [
+                    1,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.438427",
+                "episode": 3,
+                "step": 7,
+                "p": 0.0779215544462204,
+                "recommendations": [
+                    0,
+                    1
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.443268",
+                "episode": 3,
+                "step": 8,
+                "p": 0.5364578366279602,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.448029",
+                "episode": 3,
+                "step": 9,
+                "p": 0.23822107911109924,
+                "recommendations": [
+                    0,
+                    1
+                ],
+                "human_choice": 1,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.452294",
+                "episode": 3,
+                "step": 10,
+                "p": 0.41183722019195557,
+                "recommendations": [
+                    0,
+                    1
+                ],
+                "human_choice": 0,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.456488",
+                "episode": 3,
+                "step": 11,
+                "p": 0.04526536911725998,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.465703",
+                "episode": 3,
+                "step": 12,
+                "p": 0.600537896156311,
+                "recommendations": [
+                    1,
+                    1
+                ],
+                "human_choice": 0,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.470764",
+                "episode": 3,
+                "step": 13,
+                "p": 0.25605207681655884,
+                "recommendations": [
+                    1,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.475811",
+                "episode": 3,
+                "step": 14,
+                "p": 0.5986312031745911,
+                "recommendations": [
+                    1,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.480631",
+                "episode": 3,
+                "step": 15,
+                "p": 0.46079564094543457,
+                "recommendations": [
+                    0,
+                    1
+                ],
+                "human_choice": 0,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.484780",
+                "episode": 3,
+                "step": 16,
+                "p": 0.8701449632644653,
+                "recommendations": [
+                    1,
+                    0
+                ],
+                "human_choice": 0,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.488921",
+                "episode": 3,
+                "step": 17,
+                "p": 0.623794674873352,
+                "recommendations": [
+                    1,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.494028",
+                "episode": 3,
+                "step": 18,
+                "p": 0.9876983165740967,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.498996",
+                "episode": 3,
+                "step": 19,
+                "p": 0.5295915603637695,
+                "recommendations": [
+                    1,
+                    1
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.503619",
+                "episode": 3,
+                "step": 20,
+                "p": 0.9927093982696533,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Heads"
+            }
+        ],
+        [
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.570838",
+                "episode": 4,
+                "step": 1,
+                "p": 0.9119943976402283,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 0,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.575184",
+                "episode": 4,
+                "step": 2,
+                "p": 0.21200881898403168,
+                "recommendations": [
+                    1,
+                    0
+                ],
+                "human_choice": 0,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.577912",
+                "episode": 4,
+                "step": 3,
+                "p": 0.46953654289245605,
+                "recommendations": [
+                    1,
+                    1
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.581066",
+                "episode": 4,
+                "step": 4,
+                "p": 0.8656890392303467,
+                "recommendations": [
+                    1,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.584607",
+                "episode": 4,
+                "step": 5,
+                "p": 0.8307859897613525,
+                "recommendations": [
+                    1,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.588174",
+                "episode": 4,
+                "step": 6,
+                "p": 0.042386073619127274,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.592097",
+                "episode": 4,
+                "step": 7,
+                "p": 0.15889006853103638,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.594929",
+                "episode": 4,
+                "step": 8,
+                "p": 0.8027192950248718,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 0,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.601044",
+                "episode": 4,
+                "step": 9,
+                "p": 0.4177306592464447,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 0,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.605144",
+                "episode": 4,
+                "step": 10,
+                "p": 0.9415495991706848,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 0,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.608117",
+                "episode": 4,
+                "step": 11,
+                "p": 0.11467674374580383,
+                "recommendations": [
+                    0,
+                    1
+                ],
+                "human_choice": 0,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.610757",
+                "episode": 4,
+                "step": 12,
+                "p": 0.6195589303970337,
+                "recommendations": [
+                    0,
+                    1
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.613379",
+                "episode": 4,
+                "step": 13,
+                "p": 0.8608899116516113,
+                "recommendations": [
+                    1,
+                    1
+                ],
+                "human_choice": 0,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.616188",
+                "episode": 4,
+                "step": 14,
+                "p": 0.22431440651416779,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.619658",
+                "episode": 4,
+                "step": 15,
+                "p": 0.021576914936304092,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 0,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.622498",
+                "episode": 4,
+                "step": 16,
+                "p": 0.641226053237915,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.625745",
+                "episode": 4,
+                "step": 17,
+                "p": 0.36483773589134216,
+                "recommendations": [
+                    1,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.628710",
+                "episode": 4,
+                "step": 18,
+                "p": 0.2388399988412857,
+                "recommendations": [
+                    1,
+                    1
+                ],
+                "human_choice": 1,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Tails"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.631556",
+                "episode": 4,
+                "step": 19,
+                "p": 0.9151872396469116,
+                "recommendations": [
+                    1,
+                    0
+                ],
+                "human_choice": 1,
+                "human_reward": 0.0,
+                "agent_rewards": [
+                    -1.0,
+                    1.0
+                ],
+                "outcome": "Heads"
+            },
+            {
+                "session_id": "sessionid_2ee55814-4288-4808-806c-f12d87c74698",
+                "timestamp": "2026-01-19T21:06:05.634600",
+                "episode": 4,
+                "step": 20,
+                "p": 0.11169487982988358,
+                "recommendations": [
+                    0,
+                    0
+                ],
+                "human_choice": 0,
+                "human_reward": 1.0,
+                "agent_rewards": [
+                    1.0,
+                    -1.0
+                ],
+                "outcome": "Tails"
+            }
+        ]
+    ]
+}

@@ -1,10 +1,11 @@
 from backend.agents import RecommenderAgent
 
 class HumanProxyAgent(RecommenderAgent):
-    def __init__(self, agent_id="human_proxy", input_dim=3, action_dim=2, lr=1e-3, gamma=0.99, epsilon=1.0, epsilon_decay=0.995, epsilon_min=0.01, buffer_capacity=10000, batch_size=64):
+    def __init__(self, agent_id="human_proxy", input_dim=5, action_dim=2, lr=1e-3, gamma=0.99, epsilon=1.0, epsilon_decay=0.995, epsilon_min=0.01, buffer_capacity=10000, batch_size=64):
         """
         Initializes the HumanProxyAgent.
-        Input vector: [recommendation_1, recommendation_2, time_step]
+        Input vector: [recommendation_0, recommendation_1, time_step, success_0, success_1]
+        Where success_X is the cumulative count of successful recommendations by agent X in this episode.
         Action space: Choose Agent 0 or Agent 1.
         """
         super().__init__(

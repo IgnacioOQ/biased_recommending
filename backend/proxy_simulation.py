@@ -64,7 +64,7 @@ class ProxySimulation:
                 "start_time": datetime.now().isoformat(),
                 "steps_per_episode": self.steps_per_episode,
                 "data_structure_recommenders": "Dict {agent_id: [(State [p, t], Action, Reward, Next_State [p, t+1], Done)]}",
-                "data_structure_human": "List [(State [r1, r2, t], Action, Reward, Next_State [nr1, nr2, t+1], Done)]"
+                "data_structure_human": "List [(State [r0, r1, t, success_0, success_1], Action, Reward, Next_State [...], Done)]"
             },
             "episodes": []
         }
@@ -95,6 +95,10 @@ class ProxySimulation:
             obs = self.env.reset() # [p, t=0]
             done = False
             self.human_proxy_history = []
+            
+            # Track successful recommendations per agent in this episode
+            # Success = recommendation matched coin outcome (Recommend+Heads or NotRecommend+Tails)
+            success_counts = [0, 0]
 
             # Initial Recommendations
             # Recommenders observe [p, 0]
@@ -105,14 +109,21 @@ class ProxySimulation:
                 current_t = obs[1]
 
                 # 1. Human Proxy Observation
-                # Vector: [rec_1, rec_2, t]
-                human_obs = np.array([current_recs[0], current_recs[1], current_t], dtype=np.float32)
+                # Vector: [rec_0, rec_1, t, success_0, success_1]
+                human_obs = np.array([current_recs[0], current_recs[1], current_t, success_counts[0], success_counts[1]], dtype=np.float32)
 
                 # 2. Human Proxy Action
                 human_choice = self.human_proxy.select_action(human_obs)
 
                 # 3. Environment Step
                 human_reward, agent_rewards, outcome_str, done, next_obs = self.env.step(human_choice, current_recs)
+                
+                # 3.5 Update Success Counts based on coin outcome
+                # Success = Recommend(1) + Heads, or NotRecommend(0) + Tails
+                is_heads = (outcome_str == 'Heads')
+                for i, rec in enumerate(current_recs):
+                    if (rec == 1 and is_heads) or (rec == 0 and not is_heads):
+                        success_counts[i] += 1
 
                 # 4. Get Next Recommendations (for Next State of Human)
                 # Next Recommender Obs: next_obs [p', t+1]
@@ -121,7 +132,7 @@ class ProxySimulation:
                 if not done:
                     next_recs = [agent.select_action(next_obs) for agent in self.recommenders]
 
-                next_human_obs = np.array([next_recs[0], next_recs[1], next_obs[1]], dtype=np.float32)
+                next_human_obs = np.array([next_recs[0], next_recs[1], next_obs[1], success_counts[0], success_counts[1]], dtype=np.float32)
 
                 # 5. Store/Train Recommenders
                 # They observe [p, t], act, get reward, next is [p', t+1]
