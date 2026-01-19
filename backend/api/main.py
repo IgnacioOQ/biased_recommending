@@ -19,7 +19,7 @@ app = FastAPI(
 # CORS configuration
 # We always allow localhost:5173 for development
 # We optionally allow a production URL via FRONTEND_URL env var
-origins = ["http://localhost:5173"]
+origins = ["http://localhost:5173","https://biased-recommending.vercel.app"]
 
 if frontend_url := os.getenv("FRONTEND_URL"):
     origins.append(frontend_url)
