@@ -62,7 +62,7 @@ If you want to teach an agent a new language (like JAX) or technique:
 ## LOCAL PROJECT DESCRIPTION
 
 ### Project Overview
-The project stes up the framwork for an experimental study to test how recommender systems can exploit human biases in recommendation.
+The project sets up the framework for an experimental study to test how recommender systems can exploit human biases in recommendation.
 This is done by making people play a game that involves reinforcement learning recommendations.
 Each game episode has 20 time steps.
 First nature draws a number p uniformly at random between zero or one.
@@ -80,37 +80,50 @@ The unbiased policy recommends when observing 1>=p>=0.5, and does 'not recommend
 The question is how far are the policies learned by the TD-agents from the unbiased policy.
 
 ### Setup & Testing
-*   **Install Dependencies:** `pip install -r requirements.txt`
-*   **Run Tests:** `pytest tests/`
+*   **Install Dependencies:**
+    *   Backend: `pip install -r requirements.txt` (Run from root)
+    *   Frontend: `cd frontend && npm install`
+*   **Run Backend:** `python -m uvicorn backend.api.main:app --reload --port 8000`
+*   **Run Frontend:** `cd frontend && npm run dev`
+*   **Run Tests:** `pytest tests/` (Run from root)
 
 ### Key Architecture & Logic
 
+#### 1. Architecture (Monorepo)
+*   **Backend (`backend/`)**: Python/FastAPI application handling all simulation logic, agent training, and state management.
+*   **Frontend (`frontend/`)**: React/Vite application for the user interface, communicating with backend via REST API.
 
 #### 2. Agents
-*   **`src/environment.py`**: The environment logic (p generation, reward calculation).
-*   **`src/agents.py`**: The Deep Q-Learning (DQN) agent implementation using PyTorch.
+*   **`backend/environment.py`**: The environment logic (p generation, reward calculation).
+*   **`backend/agents.py`**: The Deep Q-Learning (DQN) agent implementation using PyTorch.
 
-#### 3. Simulation Loop (`src/simulation.py`)
+#### 3. Simulation Loop (`backend/simulation.py`)
 *   **Step:**
     1.  Environment generates p.
     2.  Agents observe p and output actions (Recommend/Not Recommend).
-    3.  Human (via Interface) observes Agent actions and selects one.
+    3.  Human (via React Interface) observes Agent actions and selects one.
     4.  Environment calculates outcome (Coin flip) and rewards.
     5.  Agents update their replay buffers and perform a training step.
 
 ### Key Files and Directories
 
 #### Directory Structure
-*   `src/`: Contains the core logic.
+*   `backend/`: Contains the core Python logic (formerly `src/`).
+    *   `api/`: FastAPI routes and session management.
+    *   `engine/`: Pydantic models and simulation engine.
     *   `agents.py`: DQN Agent class.
     *   `environment.py`: BanditEnvironment class.
-    *   `simulation.py`: GameSession class.
+    *   `simulation.py`: GameSession class for legacy/notebook use.
+*   `frontend/`: Contains the React application.
+    *   `src/Controls.tsx`: Main game component.
+    *   `src/App.tsx`: App entry with health check.
 *   `tests/`: Contains unit tests.
-*   `notebooks/`: Contains the user interface.
-    *   `experiment_interface.ipynb`: Interactive game for the human subject.
+*   `notebooks/`: Contains the legacy notebook interface.
+    *   `experiment_interface.ipynb`: Interactive game (notebook version).
 
 #### File Dependencies & Logic
-`simulation.py` depends on `agents.py` and `environment.py`. The notebook depends on `simulation.py`.
+`backend/simulation.py` depends on `backend/agents.py` and `backend/environment.py`.
+The React frontend depends on the FastAPI backend running on port 8000.
 
 **Legacy/Reference Implementation:**
 No legacy, project starts from scratch.

@@ -10,39 +10,24 @@
 
 ## Dependency Network
 
-Based on updated import analysis (including engine and API modules):
-- **Core Modules:**
-  - `src/logging.py`: Standard libs, numpy.
-  - `src/analysis.py`: numpy.
-  - `src/environment.py`: numpy.
-  - `src/agents.py`: numpy, torch, random, collections.
-  - `src/simulation.py`: Depends on `src.agents`, `src.environment`, `src.logging`, `src.analysis`.
+Based on post-React integration analysis:
+- **Core Modules (`backend/`):**
+  - `backend/logging.py`, `backend/analysis.py`, `backend/environment.py`, `backend/agents.py`, `backend/simulation.py`.
+  - All use relative or `backend.` imports.
 - **Advanced Modules:**
-  - `src/advanced_environment.py`: Inherits `src.environment`.
-  - `src/advanced_agents.py`: Inherits `src.agents`.
-  - `src/advanced_analysis.py`: Depends on numpy, torch.
-  - `src/advanced_simulation.py`: Depends on advanced modules + `src.simulation` + `src.logging`.
-- **Engine Module (New):**
-  - `src/engine/config.py`: pydantic.
-  - `src/engine/state.py`: pydantic.
-  - `src/engine/model.py`: Depends on `src.advanced_agents`, `src.advanced_environment`, `src.engine.config`, `src.engine.state`, torch, numpy.
-- **API Module (New):**
-  - `src/api/session.py`: Depends on `src.engine`.
-  - `src/api/routes.py`: Depends on `src.engine`, `src.api.session`, fastapi, numpy.
-  - `src/api/main.py`: Depends on `src.api.routes`, fastapi.
+  - `backend/advanced_environment.py`, `backend/advanced_agents.py`, `backend/advanced_analysis.py`, `backend/advanced_simulation.py`.
+- **Engine Module:**
+  - `backend/engine/config.py`, `backend/engine/state.py`, `backend/engine/model.py`.
+- **API Module:**
+  - `backend/api/session.py`, `backend/api/routes.py`, `backend/api/main.py`.
 - **Tests:**
-  - `tests/test_mechanics.py`: Covers core modules (4 tests).
-  - `tests/advanced_test_mechanics.py`: Covers advanced modules (5 tests).
-  - `tests/test_engine.py`: Covers engine module (16 tests).
-  - `tests/test_api.py`: Covers API module (17 tests).
-  - `tests/test_proxy_simulation.py`: Covers proxy simulation (1 test).
+  - All tests in `tests/` import from `backend.`.
 - **Notebooks:**
-  - `notebooks/experiment_interface.ipynb`: Uses `src.simulation`.
-  - `notebooks/advanced_experiment_interface.ipynb`: Uses `src.advanced_simulation`.
+  - Notebooks now import from `backend.`.
 
 ## Latest Report
 
-**Execution Date:** 2026-01-18
+**Execution Date:** 2026-01-19
 
 **Test Results:**
 1. `tests/test_api.py`: **Passed** (17 tests).
@@ -50,7 +35,7 @@ Based on updated import analysis (including engine and API modules):
 3. `tests/test_mechanics.py`: **Passed** (4 tests).
 4. `tests/test_proxy_simulation.py`: **Passed** (1 test).
 
-**Total: 38 tests passed in 4.72s**
+**Total: 38 tests passed in 1.87s**
 
 **Summary:**
-All tests passed. New engine module (`src/engine/`) provides modular simulation with Pydantic models. New API module (`src/api/`) exposes FastAPI endpoints for session management. The dependency graph shows clear layering from core → advanced → engine → API.
+Files verified. `src/` successfully renamed to `backend/`. All imports updated. Tests passing. React frontend established in `frontend/` directory. Project follows Monorepo structure defined in AGENTS.md.

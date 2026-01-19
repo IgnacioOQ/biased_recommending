@@ -23,10 +23,10 @@ class TestAPI(unittest.TestCase):
         session_store.clear()
 
     def test_health_check(self):
-        """Test health endpoint."""
+        """Test the health check endpoint."""
         response = self.client.get("/health")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json(), {"status": "healthy"})
+        self.assertEqual(response.json(), {"status": "ok"})
 
     def test_create_simulation_default_config(self):
         """Test creating simulation with default config."""
